@@ -818,7 +818,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Standalone: ENTITY_STORE_V1;UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS;LATIOS_ADDON_MECANIM_V2;LATIOS_TRANSFORMS_UNITY
+    Standalone: ENTITY_STORE_V1;UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS;LATIOS_ADDON_MECANIM_V2;LATIOS_TRANSFORMS_UNITY;UNITY_PHYSICS_CUSTOM
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
