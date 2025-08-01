@@ -23,7 +23,7 @@ namespace System.Client
                 Logger.Log(new LogData
                 {
                     Message = "Staring snapshot data transmission",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 

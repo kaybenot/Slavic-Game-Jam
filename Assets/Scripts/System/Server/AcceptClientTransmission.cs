@@ -22,7 +22,7 @@ namespace Systems.Network.Server
                 Logger.Log(new LogData
                 {
                     Message = "Received RequestTransmissionRpc",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 
@@ -32,7 +32,7 @@ namespace Systems.Network.Server
                 Logger.Log(new LogData
                 {
                     Message = $"Client connected (Entity {sourceEntity.Index}), starting snapshot transmission",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 

@@ -19,18 +19,13 @@ namespace Systems.Network.Server
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            //var networkTime = SystemAPI.GetSingleton<NetworkTime>();
-            
             foreach (var (playerInputData, entity) in SystemAPI.Query<RefRO<PlayerInputData>>()
                          .WithEntityAccess().WithAll<Simulate>())
             {
-                //if (networkTime.IsFirstTimeFullyPredictingTick)
-                //{
-                    if (playerInputData.ValueRO.TestAction.IsSet)
-                    {
-                        Debug.Log("Test action triggered on server for entity: " + entity.Index);
-                    }
-                //}
+                if (playerInputData.ValueRO.TestAction.IsSet)
+                {
+                    Debug.Log($"Test action triggered on server for entity: {entity.Index}");
+                }
             }
         }
     }

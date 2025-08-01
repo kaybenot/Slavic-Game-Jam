@@ -30,7 +30,7 @@ namespace Systems.Network.Server
                 Logger.Log(new LogData
                 {
                     Message = "Received SpawnPlayerDataRpc",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 
@@ -46,7 +46,7 @@ namespace Systems.Network.Server
                 Logger.Log(new LogData
                 {
                     Message = $"Created PlayerData for NetworkId: {requesterNetworkId.Value}",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 
