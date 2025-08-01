@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 80efe26e5239adb4494ed753e5cb5219
+guid: 2cf9582404d1b0b4aab4a7ca418cd80b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: tree
-    second: {fileID: 2100000, guid: 3e1667efed8b67b4e968eddd09075072, type: 2}
+      name: Liny
+    second: {fileID: 2100000, guid: e6c998e3a2819434ab54fa0a6fdad7a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood2
+    second: {fileID: 2100000, guid: 0e31e34de05a21542a38b2afc0f16546, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stone
+    second: {fileID: 2100000, guid: 5dd87c37ec877c747ad5df470abb970c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tent
+    second: {fileID: 2100000, guid: 70f1a744d88261b47b21bee49ec624ad, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wood
-    second: {fileID: 2100000, guid: 130944947e11df44ab98bcfe5b5f753d, type: 2}
+    second: {fileID: 2100000, guid: f3059237e28e04c489394884b237fc5b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
