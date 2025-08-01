@@ -32,6 +32,12 @@ public class HostJoinUI : MonoBehaviour
         joinButton.RegisterCallback<ClickEvent>(OnJoinClick);
     }
 
+    private void HideUI()
+    {
+        var hostJoinPanel = document.rootVisualElement.Q<VisualElement>("HostJoinPanel");
+        hostJoinPanel.visible = false;
+    }
+
     private void OnHostClick(ClickEvent evt)
     {
         var serverWorld = ClientServerBootstrap.CreateServerWorld("ServerWorld");
@@ -70,6 +76,8 @@ public class HostJoinUI : MonoBehaviour
         networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
             .GetSingletonRW<NetworkStreamDriver>();
         networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
+        
+        HideUI();
     }
 
     private void OnJoinClick(ClickEvent evt)
@@ -102,5 +110,7 @@ public class HostJoinUI : MonoBehaviour
         var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
             .GetSingletonRW<NetworkStreamDriver>();
         networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
+        
+        HideUI();
     }
 }
