@@ -23,12 +23,13 @@ namespace System.Client
                 Logger.Log(new LogData
                 {
                     Message = "Staring snapshot data transmission",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 
                 RPC.Send(new RequestTransmissionRpc(), ref entityCommandBuffer, state.EntityManager, true);
                 RPC.Send(new SpawnPlayerDataRpc(), ref entityCommandBuffer, state.EntityManager, true);
+                RPC.Send(new RequestBaseSpawnRpc(), ref entityCommandBuffer, state.EntityManager, true);
             }
             
             entityCommandBuffer.Playback(state.EntityManager);

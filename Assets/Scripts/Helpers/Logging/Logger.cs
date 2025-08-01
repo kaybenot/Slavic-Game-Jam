@@ -9,11 +9,11 @@ namespace Helpers.Logging
     public static class Logger
     {
         [BurstCompile]
-        public static void Log(LogData data)
+        public static void Log(in LogData data)
         {
             FixedString512Bytes message = data.Message;
 
-            if (data.ShowClientServerPrefix)
+            if (data.ShowClientServerPrefix != 0)
             {
                 var isClient = data.WorldUnmanaged.IsClient();
                 FixedString32Bytes prefix = isClient ? "[Client]" : "[Server]";

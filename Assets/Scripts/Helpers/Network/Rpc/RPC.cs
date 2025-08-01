@@ -22,7 +22,7 @@ namespace Helpers.Network.Rpc
                 Logger.Log(new LogData
                 {
                     Message = $"Sending {rpcCommand}",
-                    ShowClientServerPrefix = true,
+                    ShowClientServerPrefix = 1,
                     WorldUnmanaged = entityManager.WorldUnmanaged
                 });
             }
