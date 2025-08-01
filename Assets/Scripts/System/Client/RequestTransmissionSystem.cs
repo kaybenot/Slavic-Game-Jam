@@ -30,6 +30,9 @@ namespace System.Client
                 RPC.Send(new RequestTransmissionRpc(), ref entityCommandBuffer, state.EntityManager, true);
                 RPC.Send(new SpawnPlayerDataRpc(), ref entityCommandBuffer, state.EntityManager, true);
                 RPC.Send(new RequestBaseSpawnRpc(), ref entityCommandBuffer, state.EntityManager, true);
+                
+                var recenterCameraRequest = entityCommandBuffer.CreateEntity();
+                entityCommandBuffer.AddComponent<ReceiveRpcCommandRequest>(recenterCameraRequest);
             }
             
             entityCommandBuffer.Playback(state.EntityManager);
