@@ -28,7 +28,7 @@ namespace System.Client
                 });
                 
                 RPC.Send(new RequestTransmissionRpc(), ref entityCommandBuffer, state.EntityManager, true);
-                // TODO: Request spawning or whatever
+                RPC.Send(new SpawnPlayerDataRpc(), ref entityCommandBuffer, state.EntityManager, true);
             }
             
             entityCommandBuffer.Playback(state.EntityManager);
