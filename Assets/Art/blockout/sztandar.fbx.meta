@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 2cf9582404d1b0b4aab4a7ca418cd80b
+guid: ed0d2c9f117995c4c80b446bc6be7462
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Liny
-    second: {fileID: 2100000, guid: e6c998e3a2819434ab54fa0a6fdad7a3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wood2
-    second: {fileID: 2100000, guid: 0e31e34de05a21542a38b2afc0f16546, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: stone
-    second: {fileID: 2100000, guid: 5dd87c37ec877c747ad5df470abb970c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tent
-    second: {fileID: 2100000, guid: 70f1a744d88261b47b21bee49ec624ad, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tent_2ndcolor
-    second: {fileID: 2100000, guid: 7f054e99c1d765244be9559ce2742e11, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood
-    second: {fileID: 2100000, guid: f3059237e28e04c489394884b237fc5b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
