@@ -4,21 +4,20 @@ using Unity.Transforms;
 
 namespace Systems.Local
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation)]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial class CameraTargetSystem : SystemBase
     {
         protected override void OnUpdate()
         {
-            // TODO: Target something
-            SynchronizeEntityPositionWithTransform();
+            PassLocalTransformToGameObject();
         }
         
-        private void SynchronizeEntityPositionWithTransform()
+        private void PassLocalTransformToGameObject()
         {
             foreach (var (cameraTargetData, localTransform) 
-                     in SystemAPI.Query<RefRO<CameraTargetData>, RefRW<LocalTransform>>())
+                     in SystemAPI.Query<RefRW<CameraTargetData>, RefRO<LocalTransform>>())
             {
-                localTransform.ValueRW.Position = cameraTargetData.ValueRO.Transform.Value.position;
+                cameraTargetData.ValueRW.Transform.Value.position = localTransform.ValueRO.Position;
             }
         }
     }

@@ -5,10 +5,11 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Systems.Local
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.LocalSimulation)]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial struct RecenterCameraSystem : ISystem
     {
         [BurstCompile]
@@ -26,21 +27,21 @@ namespace Systems.Local
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var (recenterRequest, entity)
-                     in SystemAPI.Query<RefRO<CameraRecenterRequestData>>().WithEntityAccess())
+            foreach (var localTransform 
+                     in SystemAPI.Query<RefRO<LocalTransform>>().WithAll<BaseData, GhostOwnerIsLocal>())
             {
-                foreach (var localTransform 
-                         in SystemAPI.Query<RefRO<LocalTransform>>().WithAll<BaseData, GhostOwnerIsLocal>())
+                foreach (var cameraTargetLocalTransform 
+                         in SystemAPI.Query<RefRW<LocalTransform>>().WithAll<CameraTargetData>())
                 {
-                    foreach (var cameraTargetLocalTransform 
-                             in SystemAPI.Query<RefRW<LocalTransform>>().WithAll<CameraTargetData>())
+                    foreach (var (recenterRequest, entity)
+                             in SystemAPI.Query<RefRO<CameraRecenterRequestData>>().WithEntityAccess())
                     {
                         cameraTargetLocalTransform.ValueRW.Position = localTransform.ValueRO.Position;
-                    }
-                    break;
-                }
                 
-                ecb.DestroyEntity(entity);
+                        ecb.DestroyEntity(entity);
+                    }
+                }
+                break;
             }
             
             ecb.Playback(state.EntityManager);

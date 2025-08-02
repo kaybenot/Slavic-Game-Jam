@@ -1,4 +1,5 @@
-﻿using Data.RPC;
+﻿using Data.Camera;
+using Data.RPC;
 using Helpers.Logging;
 using Helpers.Network.Rpc;
 using Unity.Burst;
@@ -32,7 +33,7 @@ namespace System.Client
                 RPC.Send(new RequestBaseSpawnRpc(), ref entityCommandBuffer, state.EntityManager, true);
                 
                 var recenterCameraRequest = entityCommandBuffer.CreateEntity();
-                entityCommandBuffer.AddComponent<ReceiveRpcCommandRequest>(recenterCameraRequest);
+                entityCommandBuffer.AddComponent<CameraRecenterRequestData>(recenterCameraRequest);
             }
             
             entityCommandBuffer.Playback(state.EntityManager);
