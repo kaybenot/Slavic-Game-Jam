@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Recruit Units" style="height: auto; width: auto; left: 0; right: 0; flex-direction: column; position: relative; -unity-text-align: middle-center; margin-bottom: 12px; margin-top: 12px; padding-left: 2px;" />
+    <ui:Button text="Recruit Knight" name="RecruitTankButton" />
+    <ui:Button text="Recruit Mage" name="RecruitSupportButton" />
+    <ui:Button text="Recruit Archer" name="RecruitRangedButton" />
+</ui:UXML>
