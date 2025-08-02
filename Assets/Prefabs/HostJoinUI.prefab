@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4595039725367521293}
   - component: {fileID: 1628560194364533526}
   m_Layer: 5
-  m_Name: UI
+  m_Name: HostJoinUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

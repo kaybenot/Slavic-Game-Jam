@@ -1,4 +1,5 @@
 ﻿using Data.Spawner;
+using Helpers.Base;
 using Unity.Entities;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Authoring.Spawner
     public class BaseSpawnerAuthoring : MonoBehaviour
     {
         public GameObject BasePrefab;
-        public uint Id;
+        public BaseType BaseType;
         
         private class BaseSpawnerAuthoringBaker : Baker<BaseSpawnerAuthoring>
         {
@@ -16,7 +17,7 @@ namespace Authoring.Spawner
                 AddComponent(GetEntity(TransformUsageFlags.Dynamic), new BaseSpawnerData
                 {
                     BasePrefab = GetEntity(authoring.BasePrefab, TransformUsageFlags.Dynamic),
-                    Id = authoring.Id
+                    BaseType = authoring.BaseType
                 });
             }
         }
