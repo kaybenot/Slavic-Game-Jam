@@ -40,7 +40,7 @@ namespace System.Base
                         {
                             spline = splineEntity,
                             position = 1f,
-                            velocity = -1f
+                            velocity = -5f
                         });
                     }
                     else
@@ -49,7 +49,7 @@ namespace System.Base
                         {
                             spline = splineEntity,
                             position = 0f,
-                            velocity = 1f
+                            velocity = 5f
                         });
                     }
                 }
