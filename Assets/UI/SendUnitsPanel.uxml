@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS.uss?fileID=7433441132597879392&amp;guid=9f236467b10fb374da9d02b5eb024d96&amp;type=3#USS" />
+    <ui:Label text="Send Units To Battle" style="flex-direction: column; -unity-text-align: upper-center; font-size: 20px;" />
+    <ui:VisualElement name="ButtonsPanel" style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-items: stretch;">
+        <ui:Button text="&lt;" name="SendLeftButton" class="sendButton" style="font-size: 36px;" />
+        <ui:Button text="Λ&#10;" name="SendForwardButton" class="sendButton" />
+        <ui:Button text="&gt;" name="SendRightButton" class="sendButton" style="font-size: 36px;" />
+    </ui:VisualElement>
+</ui:UXML>
