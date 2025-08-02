@@ -1,5 +1,4 @@
-﻿using Unity.Entities;
-using Unity.NetCode;
+﻿using Unity.NetCode;
 
 namespace Data.RPC
 {

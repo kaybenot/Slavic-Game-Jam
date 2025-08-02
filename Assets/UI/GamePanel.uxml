@@ -1,10 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="RecruitPanel" src="project://database/Assets/UI/RecruitPanel.uxml?fileID=9197481963319205126&amp;guid=bb9bd8f3c8ec62548b8130e21ebdd126&amp;type=3#RecruitPanel" />
-    <ui:Template name="SendUnitsPanel" src="project://database/Assets/SendUnitsPanel.uxml?fileID=9197481963319205126&amp;guid=bd05c7c79efca284c91fe6499d8494df&amp;type=3#SendUnitsPanel" />
+    <ui:Template name="SendUnitsPanel" src="project://database/Assets/UI/SendUnitsPanel.uxml?fileID=9197481963319205126&amp;guid=bd05c7c79efca284c91fe6499d8494df&amp;type=3#SendUnitsPanel" />
     <ui:VisualElement name="TopPanel" picking-mode="Ignore" style="flex-grow: 1; align-self: auto; align-content: flex-start;">
         <ui:Label text="0 gold" name="GoldLabel" style="-unity-text-align: middle-left; width: 200px; font-size: 20px; left: 0; top: 0;" />
         <ui:Label text="0 gold/s" name="IncomeLabel" style="-unity-text-align: middle-left; white-space: nowrap; align-items: flex-end; width: 200px; font-size: 20px; right: 0; flex-direction: column; justify-content: flex-start; position: absolute; top: 0;" />
     </ui:VisualElement>
-    <ui:Instance template="RecruitPanel" name="RecruitPanel" style="left: 0; bottom: 0; position: absolute;" />
-    <ui:Instance template="SendUnitsPanel" name="SendUnitsPanel" style="right: 0; bottom: 0; position: absolute;" />
+    <ui:Instance template="RecruitPanel" name="RecruitPanel" style="left: 0; bottom: 0; position: absolute; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;" />
+    <ui:Instance template="SendUnitsPanel" name="SendUnitsPanel" style="right: 0; bottom: 0; position: absolute; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+        <AttributeOverrides element-name="SendLeftButton" selectable="true" focusable="true" />
+    </ui:Instance>
 </ui:UXML>

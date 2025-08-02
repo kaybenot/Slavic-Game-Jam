@@ -2,8 +2,8 @@
 {
     public enum BaseLane
     {
-        Left,
-        Right,
-        Forward
+        Left = -1,
+        Forward = 0,
+        Right = 1,
     }
 }
