@@ -8,109 +8,112 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Hash128 = Unity.Entities.Hash128;
 
-[RequireComponent(typeof(UIDocument))]
-public class HostJoinUI : MonoBehaviour
+namespace Mono
 {
-    [SerializeField] private SubScene subScene;
-    
-    private UIDocument document;
-    private Button hostButton;
-    private Button joinButton;
-
-    private void Awake()
+    [RequireComponent(typeof(UIDocument))]
+    public class HostJoinUI : MonoBehaviour
     {
-        document = GetComponent<UIDocument>();
-        if (document == null)
-        {
-            throw new System.Exception("No UIDocument found");
-        }
+        [SerializeField] private SubScene subScene;
         
-        hostButton = document.rootVisualElement.Q<Button>("Host");
-        joinButton = document.rootVisualElement.Q<Button>("Join");
-        
-        hostButton.RegisterCallback<ClickEvent>(OnHostClick);
-        joinButton.RegisterCallback<ClickEvent>(OnJoinClick);
-    }
+        private UIDocument document;
+        private Button hostButton;
+        private Button joinButton;
 
-    private void HideUI()
-    {
-        var hostJoinPanel = document.rootVisualElement.Q<VisualElement>("HostJoinPanel");
-        hostJoinPanel.visible = false;
-    }
-
-    private void OnHostClick(ClickEvent evt)
-    {
-        var serverWorld = ClientServerBootstrap.CreateServerWorld("ServerWorld");
-        var clientWorld = ClientServerBootstrap.CreateClientWorld("ClientWorld");
-
-        foreach (var world in World.All)
+        private void Awake()
         {
-            if (world.Flags == WorldFlags.Game)
+            document = GetComponent<UIDocument>();
+            if (document == null)
             {
-                world.Dispose();
-                break;
+                throw new System.Exception("No UIDocument found");
             }
+            
+            hostButton = document.rootVisualElement.Q<Button>("Host");
+            joinButton = document.rootVisualElement.Q<Button>("Join");
+            
+            hostButton.RegisterCallback<ClickEvent>(OnHostClick);
+            joinButton.RegisterCallback<ClickEvent>(OnJoinClick);
         }
 
-        if (World.DefaultGameObjectInjectionWorld == null)
+        private void HideUI()
         {
-            World.DefaultGameObjectInjectionWorld = serverWorld;
+            var hostJoinPanel = document.rootVisualElement.Q<VisualElement>("HostJoinPanel");
+            hostJoinPanel.visible = false;
         }
 
-        var port = (ushort)2137;
-
-        SceneSystem.LoadSceneAsync(serverWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
+        private void OnHostClick(ClickEvent evt)
         {
-            AutoLoad = true
-        });
-        SceneSystem.LoadSceneAsync(clientWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
-        {
-            AutoLoad = true
-        });
+            var serverWorld = ClientServerBootstrap.CreateServerWorld("ServerWorld");
+            var clientWorld = ClientServerBootstrap.CreateClientWorld("ClientWorld");
 
-        var networkStreamDriver = serverWorld.EntityManager
-            .CreateEntityQuery(typeof(NetworkStreamDriver)).GetSingletonRW<NetworkStreamDriver>();
-        networkStreamDriver.ValueRW.Listen(NetworkEndpoint.AnyIpv4.WithPort(port));
-        
-        var connectionNetworkEndpoint = NetworkEndpoint.LoopbackIpv4.WithPort(port);
-        networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
-            .GetSingletonRW<NetworkStreamDriver>();
-        networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
-        
-        HideUI();
-    }
-
-    private void OnJoinClick(ClickEvent evt)
-    {
-        var clientWorld = ClientServerBootstrap.CreateClientWorld("ClientWorld");
-
-        foreach (var world in World.All)
-        {
-            if (world.Flags == WorldFlags.Game)
+            foreach (var world in World.All)
             {
-                world.Dispose();
-                break;
+                if (world.Flags == WorldFlags.Game)
+                {
+                    world.Dispose();
+                    break;
+                }
             }
+
+            if (World.DefaultGameObjectInjectionWorld == null)
+            {
+                World.DefaultGameObjectInjectionWorld = serverWorld;
+            }
+
+            var port = (ushort)2137;
+
+            SceneSystem.LoadSceneAsync(serverWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
+            {
+                AutoLoad = true
+            });
+            SceneSystem.LoadSceneAsync(clientWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
+            {
+                AutoLoad = true
+            });
+
+            var networkStreamDriver = serverWorld.EntityManager
+                .CreateEntityQuery(typeof(NetworkStreamDriver)).GetSingletonRW<NetworkStreamDriver>();
+            networkStreamDriver.ValueRW.Listen(NetworkEndpoint.AnyIpv4.WithPort(port));
+            
+            var connectionNetworkEndpoint = NetworkEndpoint.LoopbackIpv4.WithPort(port);
+            networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
+                .GetSingletonRW<NetworkStreamDriver>();
+            networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
+            
+            HideUI();
         }
 
-        if (World.DefaultGameObjectInjectionWorld == null)
+        private void OnJoinClick(ClickEvent evt)
         {
-            World.DefaultGameObjectInjectionWorld = clientWorld;
-        }
-        
-        SceneSystem.LoadSceneAsync(clientWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
-        {
-            AutoLoad = true
-        });
+            var clientWorld = ClientServerBootstrap.CreateClientWorld("ClientWorld");
 
-        var port = (ushort)2137;
-        var ip = "127.0.0.1";
-        
-        var connectionNetworkEndpoint = NetworkEndpoint.Parse(ip, port);
-        var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
-            .GetSingletonRW<NetworkStreamDriver>();
-        networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
-        
-        HideUI();
+            foreach (var world in World.All)
+            {
+                if (world.Flags == WorldFlags.Game)
+                {
+                    world.Dispose();
+                    break;
+                }
+            }
+
+            if (World.DefaultGameObjectInjectionWorld == null)
+            {
+                World.DefaultGameObjectInjectionWorld = clientWorld;
+            }
+            
+            SceneSystem.LoadSceneAsync(clientWorld.Unmanaged, subScene.SceneGUID, new SceneSystem.LoadParameters
+            {
+                AutoLoad = true
+            });
+
+            var port = (ushort)2137;
+            var ip = "127.0.0.1";
+            
+            var connectionNetworkEndpoint = NetworkEndpoint.Parse(ip, port);
+            var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
+                .GetSingletonRW<NetworkStreamDriver>();
+            networkStreamDriver.ValueRW.Connect(clientWorld.EntityManager, connectionNetworkEndpoint);
+            
+            HideUI();
+        }
     }
 }
