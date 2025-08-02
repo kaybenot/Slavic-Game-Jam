@@ -6,5 +6,6 @@ namespace Data.Player
 	public struct PlayerData : IComponentData
 	{
 		[GhostField] public int Gold;
+		public float EarntGold;
 	}
 }

@@ -4,6 +4,6 @@ namespace Data.Player
 {
 	public struct IncomeSource : IComponentData
 	{
-		public int GoldPerSecond;
+		public float GoldPerSecond;
 	}
 }
