@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Palette:
-        m_Texture: {fileID: 2800000, guid: e7c1df51acf3e4f4685449cccbfbe0cd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 73a339e23c9be5145a0d6071e0c9b788, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -50,9 +50,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DitherOpacity: 0.3
-    - _Quantization_Level: 64
-    - _SaturationLevel: 1.18
+    - _DitherOpacity: 0.35
+    - _Quantization_Level: 1
+    - _SaturationLevel: 2.14
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
