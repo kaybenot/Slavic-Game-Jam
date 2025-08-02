@@ -49,10 +49,8 @@ namespace Systems.Network.Server
                     ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
-                
                 entityCommandBuffer.DestroyEntity(entity);
             }
-            
             entityCommandBuffer.Playback(state.EntityManager);
         }
     }

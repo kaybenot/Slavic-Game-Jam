@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Authoring.Player
 {
-    public class PlayerDataAuthoring : MonoBehaviour
+	public class PlayerDataAuthoring : MonoBehaviour
     {
         public int StartingGold = 100;
         
