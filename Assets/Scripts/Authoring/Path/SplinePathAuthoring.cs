@@ -17,7 +17,7 @@ namespace Authoring.Path {
                 var first = authoring.first.position;
                 var second = authoring.second.position;
                 
-                AddComponent(entity, new SplinePathData() {
+                AddComponent(entity, new SplineSegmentData() {
                     first = first,
                     second = second
                 });

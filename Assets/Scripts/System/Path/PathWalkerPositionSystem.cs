@@ -11,12 +11,12 @@ namespace System.Path {
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct PathWalkerPositionSystem : ISystem {
 
-        private ComponentLookup<SplinePathData> _splineLookup;
+        private ComponentLookup<SplineData> _splineLookup;
         
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate(new EntityQueryBuilder(Allocator.Temp).WithAll<LocalTransform, PathWalker>().Build(ref state));
-            _splineLookup = state.GetComponentLookup<SplinePathData>(true);
+            _splineLookup = state.GetComponentLookup<SplineData>(true);
         }
         
         [BurstCompile]
@@ -31,17 +31,24 @@ namespace System.Path {
         [BurstCompile]
         private partial struct Job : IJobEntity {
             
-            [ReadOnly] public ComponentLookup<SplinePathData> splineLookup;
+            // [ReadOnly] public ComponentLookup<SplineData> pathLookup;
+            [ReadOnly] public ComponentLookup<SplineData> splineLookup;
             
             public void Execute(ref LocalTransform transform, in PathWalker walker) {
-                // walke.position += walker.velocity * deltaTime;
-                var spline = walker.spline;
-                // var splineData = manager.GetComponentData<SplinePathData>(spline);
-                var splineData = splineLookup.GetRefRO(spline).ValueRO;
+                // var spline = walker.path;
+                // var splineData = splineLookup.GetRefRO(spline).ValueRO;
+                //
+                // var path = splineData.PathFromSpline(false);
+                // var pos = path.Interpolate(walker.position);
+                // transform.Position = pos;
+
+                var splineEntity = walker.spline;
+                var spline = splineLookup.GetRefRO(splineEntity).ValueRO;
+
+                spline.MakeWrapper(walker.segment, walker.moveSpeed > 0);
                 
-                var path = splineData.PathFromSpline(false);
-                var pos = path.Interpolate(walker.position);
-                transform.Position = pos;
+                
+                
             }
         }
     }

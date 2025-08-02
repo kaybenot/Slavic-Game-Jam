@@ -16,8 +16,8 @@ namespace Authoring.Path {
                 
                 AddComponent(entity, new PathWalker() {
                     spline = GetEntity(authoring.path, TransformUsageFlags.None),
-                    position = authoring.startPos,
-                    velocity = authoring.speed
+                    localPosition = authoring.startPos,
+                    localVelocity = authoring.speed
                 });
             }
         }

@@ -3,7 +3,10 @@
 namespace Data.Path {
     public partial struct PathWalker : IComponentData {
         public Entity spline;
-        public float position;
-        public float velocity;
+        public int segment;
+        public float localPosition;
+        public float localVelocity;
+        public float moveSpeed;
+        public byte invert;
     }
 }
