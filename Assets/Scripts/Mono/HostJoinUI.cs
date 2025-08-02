@@ -34,9 +34,12 @@ namespace Mono
         {
             var hostJoinPanel = document.rootVisualElement.Q<VisualElement>("HostJoinPanel");
             hostJoinPanel.visible = false;
-        }
 
-        private void OnHostClick(ClickEvent evt)
+            var gamePanel = document.rootVisualElement.Q<VisualElement>("GamePanel");
+            gamePanel.visible = true;
+		}
+
+		private void OnHostClick(ClickEvent evt)
         {
             var serverWorld = ClientServerBootstrap.CreateServerWorld("ServerWorld");
             var clientWorld = ClientServerBootstrap.CreateClientWorld("ClientWorld");
