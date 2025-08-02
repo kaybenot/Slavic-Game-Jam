@@ -1,5 +1,7 @@
-﻿using Data.RPC;
+﻿using Data.Base;
+using Data.RPC;
 using Data.Spawner;
+using Helpers.Base;
 using Helpers.Logging;
 using Unity.Burst;
 using Unity.Collections;
@@ -39,7 +41,7 @@ namespace Systems.Network.Server
                 foreach (var (baseSpawnerData, localTransform)
                          in SystemAPI.Query<RefRO<BaseSpawnerData>, RefRW<LocalTransform>>())
                 {
-                    if (baseSpawnerData.ValueRO.Id == currentId)
+                    if ((int)baseSpawnerData.ValueRO.BaseType == currentId)
                     {
                         var sourceEntity = receiveRpcCommandRequest.ValueRO.SourceConnection;
                         var baseObj = entityCommandBuffer.Instantiate(baseSpawnerData.ValueRO.BasePrefab);
@@ -48,6 +50,10 @@ namespace Systems.Network.Server
                             Position = localTransform.ValueRO.Position,
                             Rotation = localTransform.ValueRO.Rotation,
                             Scale = localTransform.ValueRO.Scale
+                        });
+                        entityCommandBuffer.SetComponent(baseObj, new BaseData
+                        {
+                            BaseType = (BaseType)currentId
                         });
                         var requesterNetworkId =
                             SystemAPI.GetComponent<NetworkId>(sourceEntity);
