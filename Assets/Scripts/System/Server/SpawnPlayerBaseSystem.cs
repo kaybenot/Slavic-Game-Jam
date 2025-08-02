@@ -41,7 +41,7 @@ namespace Systems.Network.Server
                 foreach (var (baseSpawnerData, localTransform)
                          in SystemAPI.Query<RefRO<BaseSpawnerData>, RefRW<LocalTransform>>())
                 {
-                    if (baseSpawnerData.ValueRO.Id == currentId)
+                    if ((int)baseSpawnerData.ValueRO.BaseType == currentId)
                     {
                         var sourceEntity = receiveRpcCommandRequest.ValueRO.SourceConnection;
                         var baseObj = entityCommandBuffer.Instantiate(baseSpawnerData.ValueRO.BasePrefab);
