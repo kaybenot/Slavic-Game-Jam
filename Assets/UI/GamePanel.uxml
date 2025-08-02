@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="TopPanel" style="flex-grow: 1; align-self: auto; align-content: flex-start;">
+    <ui:VisualElement name="TopPanel" picking-mode="Ignore" style="flex-grow: 1; align-self: auto; align-content: flex-start;">
         <ui:Label text="0 gold" name="GoldLabel" style="-unity-text-align: middle-left; width: 200px; font-size: 20px; left: 0; top: 0;" />
         <ui:Label text="0 gold/s" name="IncomeLabel" style="-unity-text-align: middle-left; white-space: nowrap; align-items: flex-end; width: 200px; font-size: 20px; right: 0; flex-direction: column; justify-content: flex-start; position: absolute; top: 0;" />
     </ui:VisualElement>

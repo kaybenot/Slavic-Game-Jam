@@ -5,5 +5,5 @@
         <ui:Button text="Host" name="Host" />
         <ui:Button text="Join" name="Join" />
     </ui:VisualElement>
-    <ui:Instance template="GamePanel" name="GamePanel" style="position: absolute; height: auto; width: auto; left: 0; right: 0;" />
+    <ui:Instance template="GamePanel" name="GamePanel" picking-mode="Ignore" style="position: absolute; height: auto; width: auto; left: 0; right: 0; font-size: 20px; visibility: hidden;" />
 </ui:UXML>
