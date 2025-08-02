@@ -33,10 +33,8 @@ namespace System.Path {
             
             [ReadOnly] public ComponentLookup<SplinePathData> splineLookup;
             
-            public void Execute(ref LocalTransform transform, in PathWalker walker) {
-                // walke.position += walker.velocity * deltaTime;
+            private void Execute(ref LocalTransform transform, in PathWalker walker) {
                 var spline = walker.spline;
-                // var splineData = manager.GetComponentData<SplinePathData>(spline);
                 var splineData = splineLookup.GetRefRO(spline).ValueRO;
                 
                 var path = splineData.PathFromSpline(false);

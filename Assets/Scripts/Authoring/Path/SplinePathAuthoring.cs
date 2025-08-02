@@ -1,14 +1,14 @@
 ﻿using Data.Path;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.Splines;
+using SplineType = Helpers.Path.SplineType;
 
 namespace Authoring.Path {
     
     public class SplinePathAuthoring : MonoBehaviour {
         [SerializeField] private Transform first;
         [SerializeField] private Transform second;
+        [SerializeField] private SplineType splineType;
 
         public class SplinePathBaker : Baker<SplinePathAuthoring> {
             public override void Bake(SplinePathAuthoring authoring) {
@@ -19,7 +19,8 @@ namespace Authoring.Path {
                 
                 AddComponent(entity, new SplinePathData() {
                     first = first,
-                    second = second
+                    second = second,
+                    splineType = authoring.splineType
                 });
             }
         }

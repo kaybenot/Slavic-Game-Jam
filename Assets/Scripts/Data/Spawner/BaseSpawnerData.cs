@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Helpers.Base;
+using Unity.Entities;
 
 namespace Data.Spawner
 {
@@ -6,5 +7,10 @@ namespace Data.Spawner
     {
         public Entity BasePrefab;
         public uint Id;
+        public BaseType BaseType
+        {
+            set => Id = (uint) value;
+            get => (BaseType) Id;
+        }
     }
 }
