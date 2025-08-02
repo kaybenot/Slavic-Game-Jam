@@ -20,8 +20,7 @@ namespace Mono
 
         private void Awake()
         {
-            document = GetComponent<UIDocument>();
-            if (document == null)
+            if (!TryGetComponent(out document))
             {
                 throw new Exception("No UIDocument found");
             }
@@ -37,9 +36,12 @@ namespace Mono
         {
             var hostJoinPanel = document.rootVisualElement.Q<VisualElement>("HostJoinPanel");
             hostJoinPanel.visible = false;
-        }
 
-        private void OnHostClick(ClickEvent evt)
+            var gamePanel = document.rootVisualElement.Q<VisualElement>("GamePanel");
+            gamePanel.visible = true;
+		}
+
+		private void OnHostClick(ClickEvent evt)
         {
             var (clientWorld, serverWorld) = BootstrapWorld("ClientWorld", "ServerWorld");
 
