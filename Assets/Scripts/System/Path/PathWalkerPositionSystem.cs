@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace System.Path {
@@ -23,7 +24,8 @@ namespace System.Path {
         public void OnUpdate(ref SystemState state) {
             _splineLookup.Update(ref state);
             var job = new Job() {
-                splineLookup = _splineLookup
+                splineLookup = _splineLookup,
+                // lerpCoefficient = math.pow(0.5f)
             };
             job.ScheduleParallel(new JobHandle()).Complete();
         }
@@ -33,8 +35,10 @@ namespace System.Path {
             
             // [ReadOnly] public ComponentLookup<SplineData> pathLookup;
             [ReadOnly] public ComponentLookup<SplineData> splineLookup;
+            //
+            // public float lerpCoefficient;
             
-            public void Execute(ref LocalTransform transform, in PathWalker walker) {
+            public void Execute(ref TargetPos target, in PathWalker walker) {
                 // var spline = walker.path;
                 // var splineData = splineLookup.GetRefRO(spline).ValueRO;
                 //
@@ -45,10 +49,10 @@ namespace System.Path {
                 var splineEntity = walker.spline;
                 var spline = splineLookup.GetRefRO(splineEntity).ValueRO;
 
-                spline.MakeWrapper(walker.segment, walker.moveSpeed > 0);
-                
-                
-                
+                var wrapper = spline.MakeWrapper(walker.segment, walker.invert != 0);
+                var pos = wrapper.Interpolate(walker.localPosition);
+
+                target.targetPos = pos + wrapper.normalSide * walker.offset * PathConstants.OffsetScale;
             }
         }
     }

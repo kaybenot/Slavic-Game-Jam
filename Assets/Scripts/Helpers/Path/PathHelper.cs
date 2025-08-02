@@ -7,16 +7,15 @@ namespace Helpers.Path {
     public static class PathHelper {
 
         [BurstCompile]
-        public static bool TryAdvanceSegment(ref PathWalker walker, in SplineData spline, sbyte direction) {
+        public static bool TryAdvanceSegment(ref PathWalker walker, in SplineData spline, bool invert) {
             var segmentId = walker.segment;
-            segmentId += direction;
+            segmentId += invert ? -1 : 1;
 
             if (segmentId >= 0 && segmentId < spline.points.Value.segmentCount) {
-                // direction < 0 -> position + 1 // -dir
-                // direction > 0 -> position - 1 // -dir
-                var wrapper = spline.MakeWrapper(segmentId, false);
+                var wrapper = spline.MakeWrapper(segmentId, invert);
                 walker.segment = segmentId;
-                walker.localPosition -= direction;
+                //Move position to next segment
+                walker.localPosition -= 1;
                 walker.localVelocity = walker.moveSpeed / wrapper.Length();
                 
                 return true;

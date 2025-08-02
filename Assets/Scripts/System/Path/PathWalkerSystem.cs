@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
 
 namespace System.Path {
     
@@ -42,10 +43,9 @@ namespace System.Path {
                 var spline = splineLookup.GetRefRO(walker.spline).ValueRO;
                 walker.localPosition += walker.localVelocity * deltaTime;
 
-                if (walker.localPosition > 1f && !PathHelper.TryAdvanceSegment(ref walker, spline, (sbyte)walker.moveSpeed)) {
+                if (walker.localPosition > 1f && !PathHelper.TryAdvanceSegment(ref walker, spline, walker.invert != 0)) {
                     commandBuffer.DestroyEntity(idx, entity);
                 }
-                
             }
         }
     }
