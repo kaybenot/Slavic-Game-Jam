@@ -1,5 +1,6 @@
 ﻿using Data.Path;
 using Helpers.Path;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
@@ -10,10 +11,12 @@ namespace System.Path {
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct PathWalkerPositionSystem : ISystem {
         
+        [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate(new EntityQueryBuilder(Allocator.Temp).WithAll<LocalTransform, PathWalker>().Build(ref state));
         }
-
+        
+        [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var job = new Job() {
                 splineLookup = state.GetComponentLookup<SplinePathData>(true)
@@ -22,6 +25,7 @@ namespace System.Path {
         }
 
 
+        [BurstCompile]
         private partial struct Job : IJobEntity {
 
             // [ReadOnly] public EntityManager manager;

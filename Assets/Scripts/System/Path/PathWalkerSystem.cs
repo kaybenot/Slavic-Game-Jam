@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Data.Path;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
 
-namespace Data.Path {
+namespace System.Path {
     
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct PathWalkerSystem : ISystem {
-
+        
+        [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<PathWalker>();
         }
-
+        
+        [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             var job = new Job() {
                 deltaTime = SystemAPI.Time.DeltaTime
@@ -19,6 +22,7 @@ namespace Data.Path {
         }
 
 
+        [BurstCompile]
         private partial struct Job : IJobEntity {
 
             public float deltaTime;
