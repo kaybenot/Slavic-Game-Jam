@@ -6,7 +6,7 @@ using Logger = Helpers.Logging.Logger;
 
 namespace Helpers.Network.Rpc
 {
-    [BurstCompile]
+	[BurstCompile]
     public static class RPC
     {
         [BurstCompile]

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.NetCode;
 using Unity.Collections;
-using System;
+using Helpers.Network;
 
 public class PlayerDataUIController : MonoBehaviour
 {
@@ -27,15 +27,7 @@ public class PlayerDataUIController : MonoBehaviour
 
 	private void UpdateValues()
 	{
-		World world = default;
-		for (int w = 0; w < World.All.Count; w++)
-		{
-			if (World.All[w].Name != "ClientWorld")
-				continue;
-
-			world = World.All[w];
-		}
-
+		World world = WorldHelper.GetClientWorld();
 		if (world == default)
 			return;
 

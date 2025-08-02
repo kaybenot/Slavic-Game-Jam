@@ -21,7 +21,7 @@ namespace System.Base
             state.RequireForUpdate<RequestUnitSpawnRpc>();
             state.RequireForUpdate<UnitSpawnerData>();
 
-            var query = SystemAPI.QueryBuilder().WithAll<BaseData, GhostOwnerIsLocal>().Build();
+            var query = SystemAPI.QueryBuilder().WithAll<BaseData, GhostOwner>().Build();
             state.RequireForUpdate(query);
         }
 
@@ -74,8 +74,13 @@ namespace System.Base
                 var spawnerData = SystemAPI.GetSingleton<UnitSpawnerData>();
                 var unitEntity = entityCommandBuffer.Instantiate(spawnerData.UnitPrefab);
 
-                foreach (var baseData in SystemAPI.Query<RefRO<BaseData>>().WithAll<GhostOwnerIsLocal>())
+                foreach (var (baseData, ghostOwner) in SystemAPI.Query<RefRO<BaseData>, RefRO<GhostOwner>>())
                 {
+                    if (ghostOwner.ValueRO.NetworkId != SystemAPI.GetComponent<NetworkId>(receiveRpcCommandRequest.ValueRO.SourceConnection).Value)
+                    {
+                        continue;
+                    }
+                    
                     switch (baseData.ValueRO.BaseType)
                     {
                         case BaseType.Red:
