@@ -10,25 +10,27 @@ namespace System.Path {
     
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct PathWalkerPositionSystem : ISystem {
+
+        private ComponentLookup<SplinePathData> _splineLookup;
         
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate(new EntityQueryBuilder(Allocator.Temp).WithAll<LocalTransform, PathWalker>().Build(ref state));
+            _splineLookup = state.GetComponentLookup<SplinePathData>(true);
         }
         
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
+            _splineLookup.Update(ref state);
             var job = new Job() {
-                splineLookup = state.GetComponentLookup<SplinePathData>(true)
+                splineLookup = _splineLookup
             };
             job.ScheduleParallel(new JobHandle()).Complete();
         }
 
-
         [BurstCompile]
         private partial struct Job : IJobEntity {
-
-            // [ReadOnly] public EntityManager manager;
+            
             [ReadOnly] public ComponentLookup<SplinePathData> splineLookup;
             
             public void Execute(ref LocalTransform transform, in PathWalker walker) {
