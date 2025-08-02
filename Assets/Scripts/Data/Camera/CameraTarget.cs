@@ -5,6 +5,5 @@ namespace Data.Camera
 {
     public struct CameraTargetData : IComponentData
     {
-        public UnityObjectRef<Transform> Transform;
     }
 }

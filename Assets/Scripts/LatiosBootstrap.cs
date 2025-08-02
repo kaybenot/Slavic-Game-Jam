@@ -69,7 +69,6 @@ public class LatiosBootstrap : ClientServerBootstrap
 
         ScriptBehaviourUpdateOrder.AppendWorldToCurrentPlayerLoop(world);
 
-        AutoConnectPort = 2137;
-        return base.Initialize(defaultWorldName);
+        return false;
     }
 }

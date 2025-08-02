@@ -12,10 +12,7 @@ namespace Authoring.Camera
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 
-                AddComponent(entity, new CameraTargetData
-                {
-                    Transform = authoring.transform
-                });
+                AddComponent(entity, new CameraTargetData());
             }
         }
     }
