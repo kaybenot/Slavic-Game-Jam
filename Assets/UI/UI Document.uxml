@@ -1,7 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="GamePanel" src="project://database/Assets/UI/GamePanel.uxml?fileID=9197481963319205126&amp;guid=a48432f9d7e3d934fa1d9bb037ccbfa7&amp;type=3#GamePanel" />
     <Style src="project://database/Assets/UI/USS.uss?fileID=7433441132597879392&amp;guid=9f236467b10fb374da9d02b5eb024d96&amp;type=3#USS" />
-    <ui:VisualElement name="HostJoinPanel" style="flex-grow: 1;">
+    <ui:VisualElement name="HostJoinPanel" enabled="true" style="flex-grow: 1; overflow: visible;">
         <ui:Button text="Host" name="Host" />
         <ui:Button text="Join" name="Join" />
     </ui:VisualElement>
+    <ui:Instance template="GamePanel" name="GamePanel" style="position: absolute; height: auto; width: auto; left: 0; right: 0;" />
 </ui:UXML>

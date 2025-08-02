@@ -19,7 +19,7 @@ namespace Mono
                 }
                     
                 var entityManager = World.All[i].EntityManager;
-                var query = entityManager.CreateEntityQuery(typeof(CameraTargetData));
+                using var query = entityManager.CreateEntityQuery(typeof(CameraTargetData));
                 if (query.IsEmpty)
                 {
                     return;

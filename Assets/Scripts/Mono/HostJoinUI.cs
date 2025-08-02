@@ -1,12 +1,9 @@
-using System;
 using Unity.Entities;
 using Unity.NetCode;
 using Unity.Networking.Transport;
 using Unity.Scenes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Hash128 = Unity.Entities.Hash128;
 
 namespace Mono
 {
@@ -21,8 +18,7 @@ namespace Mono
 
         private void Awake()
         {
-            document = GetComponent<UIDocument>();
-            if (document == null)
+            if (!TryGetComponent(out document))
             {
                 throw new System.Exception("No UIDocument found");
             }
