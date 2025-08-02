@@ -1,9 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Settings/Build Profiles/Game Object Rendering.asset.meta
-guid: f7b0931aaeaefee4dbd837c199f1c3b9
-========
-guid: 4fa35ac3332531c4ea8194ad0108435c
->>>>>>>> 52f62ba63fc970df48d42a89fa4303f987a4f994:Assets/Scenes/Main/Main Baking Set.asset.meta
+guid: b5f68317407f13f45bcb2ad757456329
+Set.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
