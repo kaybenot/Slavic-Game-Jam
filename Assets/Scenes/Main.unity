@@ -1017,70 +1017,30 @@ PrefabInstance:
       propertyPath: subScene
       value: 
       objectReference: {fileID: 786055329}
+    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
+      propertyPath: hostButton.uiDocument
+      value: 
+      objectReference: {fileID: 5926145003203800763}
+    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
+      propertyPath: joinButton.uiDocument
+      value: 
+      objectReference: {fileID: 5926145003203800763}
+    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
+      propertyPath: hostButton.elementPath
+      value: HostJoinPanel/Host
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
+      propertyPath: joinButton.elementPath
+      value: HostJoinPanel/Join
+      objectReference: {fileID: 0}
     - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
       propertyPath: costm.uiAsset
       value: 
       objectReference: {fileID: 9197481963319205126, guid: a48432f9d7e3d934fa1d9bb037ccbfa7, type: 3}
     - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: costm.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: costm.elementPath
-      value: HostJoinPanel/Host
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
       propertyPath: gameplayController
       value: 
       objectReference: {fileID: 633425875}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendLeftButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendLeftButtonReference.elementPath
-      value: GamePanel/SendUnitsPanel/ButtonsPanel/SendLeftButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendRightButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendRightButtonReference.elementPath
-      value: GamePanel/SendUnitsPanel/ButtonsPanel/SendRightButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitTankButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendForwardButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitTankButtonReference.elementPath
-      value: GamePanel/RecruitPanel/RecruitTankButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: sendForwardButtonReference.elementPath
-      value: GamePanel/SendUnitsPanel/ButtonsPanel/SendForwardButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitRangedButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitRangedButtonReference.elementPath
-      value: GamePanel/RecruitPanel/RecruitRangedButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitSupportButtonReference.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: recruitSupportButtonReference.elementPath
-      value: GamePanel/RecruitPanel/RecruitSupportButton
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

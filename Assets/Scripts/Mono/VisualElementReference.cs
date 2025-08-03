@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [System.Serializable]
-public class VisualElementReference
+public class VisualElementReference<T> 
+	where T : VisualElement
 {
 	[SerializeField]
 	private UIDocument uiDocument;
@@ -29,22 +30,23 @@ public class VisualElementReference
 		}
 	}
 
-	private VisualElement cachedElement;
+	private T cachedElement;
 
-	public T GetElement<T>() where T : VisualElement => GetElement() as T;
-
-	public VisualElement GetElement()
+	public T VisualElement
 	{
-		if (uiDocument == null)
-			return null;
+		get
+		{
+			if (uiDocument == null)
+				return null;
 
-		if (cachedElement != null)
-			return cachedElement;
+			if (cachedElement != null)
+				return cachedElement;
 
-		return GetElement(uiDocument.rootVisualElement);
+			return GetElement(uiDocument.rootVisualElement);
+		}
 	}
 
-	private VisualElement GetElement(VisualElement root)
+	private T GetElement(VisualElement root)
 	{
 		if (root == null || string.IsNullOrEmpty(elementPath))
 			return null;
@@ -60,6 +62,12 @@ public class VisualElementReference
 			var children = element.Children();
 			element = children.FirstOrDefault(x => x.name == part);
 		}
-		return element;
+		return element as T;
 	}
+}
+
+[System.Serializable]
+public class VisualElementReference : VisualElementReference<VisualElement>
+{
+	public T GetElement<T>() where T : VisualElement => VisualElement as T;
 }

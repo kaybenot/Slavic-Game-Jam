@@ -67,6 +67,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subScene: {fileID: 0}
+  hostButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/Host
+  joinButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/Join
 --- !u!114 &1628560194364533526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +119,3 @@ MonoBehaviour:
   sendRightButtonReference:
     uiDocument: {fileID: 6576804195842958996}
     elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendRightButton
-  costm:
-    uiDocument: {fileID: 6576804195842958996}
-    elementPath: HostJoinPanel/Host

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
-[CustomPropertyDrawer(typeof(VisualElementReference))]
+[CustomPropertyDrawer(typeof(VisualElementReference<>), useForChildren: true)]
 public class VisualElementReferenceDrawer : PropertyDrawer
 {
 	private const string DocumentFieldName = "uiDocument";
@@ -16,7 +16,6 @@ public class VisualElementReferenceDrawer : PropertyDrawer
 
 	private static readonly GUIContent ElementPathPropertyLabel = new GUIContent("Element Path");
 	private static readonly GUIContent DocumentPropertyLabel = new GUIContent("UI Document");
-
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 	{

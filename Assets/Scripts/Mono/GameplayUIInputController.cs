@@ -11,17 +11,17 @@ public class GameplayUIInputController : MonoBehaviour
 
 	[Header("Visual Elements")]
 	[SerializeField]
-	private VisualElementReference recruitTankButtonReference;
+	private VisualElementReference<Button> recruitTankButtonReference;
 	[SerializeField]
-	private VisualElementReference recruitSupportButtonReference;
+	private VisualElementReference<Button> recruitSupportButtonReference;
 	[SerializeField]
-	private VisualElementReference recruitRangedButtonReference;
+	private VisualElementReference<Button> recruitRangedButtonReference;
 	[SerializeField]
-	private VisualElementReference sendLeftButtonReference;
+	private VisualElementReference<Button> sendLeftButtonReference;
 	[SerializeField]
-	private VisualElementReference sendForwardButtonReference;
+	private VisualElementReference<Button> sendForwardButtonReference;
 	[SerializeField]
-	private VisualElementReference sendRightButtonReference;
+	private VisualElementReference<Button> sendRightButtonReference;
 
 	private Button recruitTankButton;
 	private Button recruitSupportButton;
@@ -33,13 +33,13 @@ public class GameplayUIInputController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		recruitTankButton = recruitTankButtonReference.GetElement<Button>();
-		recruitSupportButton = recruitSupportButtonReference.GetElement<Button>();
-		recruitRangedButton = recruitRangedButtonReference.GetElement<Button>();
+		recruitTankButton = recruitTankButtonReference.VisualElement;
+		recruitSupportButton = recruitSupportButtonReference.VisualElement;
+		recruitRangedButton = recruitRangedButtonReference.VisualElement;
 
-		sendLeftButton = sendLeftButtonReference.GetElement<Button>();
-		sendForwardButton = sendForwardButtonReference.GetElement<Button>();
-		sendRightButton = sendRightButtonReference.GetElement<Button>();
+		sendLeftButton = sendLeftButtonReference.VisualElement;
+		sendForwardButton = sendForwardButtonReference.VisualElement;
+		sendRightButton = sendRightButtonReference.VisualElement;
 
 		recruitTankButton.clicked += RecruitTank;
 		recruitSupportButton.clicked += RecruitSupport;
