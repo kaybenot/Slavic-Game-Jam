@@ -8,7 +8,7 @@ namespace Helpers.Path {
     public static class PathExtensions {
 
         [BurstCompile]
-        public static PathWrapper MakeWrapper(in this SplineData spline, int idx, bool invert) {
+        public static void MakeWrapper(in this SplineData spline, int idx, bool invert, ref PathWrapper wrapper){
             ref var points = ref spline.points.Value;
             
             if (invert) {
@@ -18,16 +18,15 @@ namespace Helpers.Path {
             var p1 = points.points[idx];
             var p2 = points.points[idx + 1];
 
-            return MakeWrapper(p1, p2, points.normalsSide[idx], invert);
+            MakeWrapper(p1, p2, points.normalsSide[idx], invert, ref wrapper);
         }
 
         [BurstCompile]
-        public static PathWrapper MakeWrapper(float3 start, float3 end, float3 normal, bool invert) {
-            return new PathWrapper {
-                start = invert ? start : end,
-                end = invert ? end : start,
-                normalSide = invert ? -normal : normal
-            };
+        private static void MakeWrapper(in float3 start, in float3 end, in float3 normal, bool invert, ref PathWrapper wrapper)
+        {
+            wrapper.start = invert ? start : end;
+            wrapper.end = invert ? end : start;
+            wrapper.normalSide = invert ? -normal : normal;
         }
         
     }

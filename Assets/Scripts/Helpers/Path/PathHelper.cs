@@ -12,7 +12,10 @@ namespace Helpers.Path {
             segmentId += invert ? -1 : 1;
 
             if (segmentId >= 0 && segmentId < spline.points.Value.segmentCount) {
-                var wrapper = spline.MakeWrapper(segmentId, invert);
+                
+                var wrapper = new PathWrapper();
+                
+                spline.MakeWrapper(segmentId, invert, ref wrapper);
                 walker.segment = segmentId;
                 //Move position to next segment
                 walker.localPosition -= 1;
