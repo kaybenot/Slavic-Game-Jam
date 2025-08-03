@@ -9,10 +9,13 @@ namespace Helpers.Path {
         [BurstCompile]
         public static bool TryAdvanceSegment(ref PathWalker walker, in SplineData spline, bool invert) {
             var segmentId = walker.segment;
-            segmentId += invert ? -1 : 1;
+            segmentId += 1; //invert ? -1 : 1;
 
             if (segmentId >= 0 && segmentId < spline.points.Value.segmentCount) {
-                var wrapper = spline.MakeWrapper(segmentId, invert);
+                
+                var wrapper = new PathWrapper();
+                
+                spline.MakeWrapper(segmentId, invert, ref wrapper);
                 walker.segment = segmentId;
                 //Move position to next segment
                 walker.localPosition -= 1;

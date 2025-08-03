@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace Helpers.Path {
     [BurstCompile]
-    public ref struct PathWrapper {
+    public struct PathWrapper {
 
         public float3 start;
         public float3 end;

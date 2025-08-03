@@ -49,7 +49,9 @@ namespace System.Path {
                 var splineEntity = walker.spline;
                 var spline = splineLookup.GetRefRO(splineEntity).ValueRO;
 
-                var wrapper = spline.MakeWrapper(walker.segment, walker.invert != 0);
+                var wrapper = new PathWrapper();
+
+                spline.MakeWrapper(walker.segment, walker.invert != 0, ref wrapper);
                 var pos = wrapper.Interpolate(walker.localPosition);
 
                 target.targetPos = pos + wrapper.normalSide * walker.offset * PathConstants.OffsetScale;
