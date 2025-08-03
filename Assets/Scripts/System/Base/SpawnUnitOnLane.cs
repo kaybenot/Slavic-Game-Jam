@@ -58,6 +58,7 @@ namespace System.Base
         public void OnUpdate(ref SystemState state)
         {
             var entityCommandBuffer = new EntityCommandBuffer(Allocator.Temp);
+            
             foreach (var (receiveRpcCommandRequest, unitSpawnRequest, rpcEntity) 
                      in SystemAPI.Query<RefRO<ReceiveRpcCommandRequest>, RefRO<RequestUnitSpawnRpc>>().WithEntityAccess())
             {
@@ -67,7 +68,9 @@ namespace System.Base
                     ShowClientServerPrefix = 1,
                     WorldUnmanaged = state.WorldUnmanaged
                 });
-
+                
+                var flag = true;
+                
                 foreach (var (playerData, ghostOwner) in SystemAPI.Query<RefRW<PlayerData>, RefRO<GhostOwner>>())
 				{
                     if (ghostOwner.ValueRO.NetworkId != SystemAPI.GetComponent<NetworkId>(receiveRpcCommandRequest.ValueRO.SourceConnection).Value)
@@ -77,13 +80,19 @@ namespace System.Base
                     if (playerData.ValueRO.Gold < price)
                     {
                         entityCommandBuffer.DestroyEntity(rpcEntity);
-                        entityCommandBuffer.Playback(state.EntityManager);
-                        return;
+                        // entityCommandBuffer.Playback(state.EntityManager);
+                        flag = false;
+                        break;
                     }
 
                     playerData.ValueRW.Gold -= price;
 				}
 
+                if (!flag) {
+                    continue;
+                }
+                
+                
                 var spawnerData = SystemAPI.GetSingleton<UnitSpawnerData>();
                 var unitEntity = entityCommandBuffer.Instantiate(spawnerData.UnitPrefab);
                 foreach (var (baseData, ghostOwner) in SystemAPI.Query<RefRO<BaseData>, RefRO<GhostOwner>>())
