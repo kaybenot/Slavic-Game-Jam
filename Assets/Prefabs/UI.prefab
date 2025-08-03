@@ -85,8 +85,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0f9bf10a08174409e4d66039dc1213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiDocument: {fileID: 6576804195842958996}
-  currentGold: 0
+  goldLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/GoldLabel
+  incomeLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/IncomeLabel
+  baseHealthLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/HealthLabel
 --- !u!114 &5153845138507569526
 MonoBehaviour:
   m_ObjectHideFlags: 0

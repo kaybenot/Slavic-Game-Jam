@@ -9,12 +9,13 @@ using Helpers.Network;
 public class PlayerDataUIController : MonoBehaviour
 {
 	[SerializeField]
-	private UIDocument uiDocument;
-
-	[Space]
+	private VisualElementReference<Label> goldLabel;	
 	[SerializeField]
-	private int currentGold;
+	private VisualElementReference<Label> incomeLabel;
+	[SerializeField]
+	private VisualElementReference<Label> baseHealthLabel;
 
+	private int currentGold;
 	private float incomeRefreshTimer;
 
 	private void Start()
@@ -52,9 +53,7 @@ public class PlayerDataUIController : MonoBehaviour
 		if (currentGold != playerData.Gold)
 		{
 			currentGold = playerData.Gold;
-			var goldLabel = uiDocument.rootVisualElement.Q<Label>("GoldLabel");
-			if (goldLabel != null)
-				goldLabel.text = $"{currentGold} gold";
+			goldLabel.VisualElement.text = $"{currentGold} gold";
 		}
 	}
 
@@ -68,8 +67,7 @@ public class PlayerDataUIController : MonoBehaviour
 			var entity = playersIncomeSources[i];
 			income += entity.GoldPerSecond;
 		}
-		var label = uiDocument.rootVisualElement.Q<Label>("IncomeLabel");
-		if (label != null)
-			label.text = $"{income} gold/s";
+
+		incomeLabel.VisualElement.text = $"{income} gold/s";
 	}
 }

@@ -2,8 +2,9 @@
     <ui:Template name="RecruitPanel" src="project://database/Assets/UI/RecruitPanel.uxml?fileID=9197481963319205126&amp;guid=bb9bd8f3c8ec62548b8130e21ebdd126&amp;type=3#RecruitPanel" />
     <ui:Template name="SendUnitsPanel" src="project://database/Assets/UI/SendUnitsPanel.uxml?fileID=9197481963319205126&amp;guid=bd05c7c79efca284c91fe6499d8494df&amp;type=3#SendUnitsPanel" />
     <ui:VisualElement name="TopPanel" picking-mode="Ignore" style="flex-grow: 1; align-self: auto; align-content: flex-start;">
-        <ui:Label text="0 gold" name="GoldLabel" style="-unity-text-align: middle-left; width: 200px; font-size: 20px; left: 0; top: 0;" />
-        <ui:Label text="0 gold/s" name="IncomeLabel" style="-unity-text-align: middle-left; white-space: nowrap; align-items: flex-end; width: 200px; font-size: 20px; right: 0; flex-direction: column; justify-content: flex-start; position: absolute; top: 0;" />
+        <ui:Label text="0 gold" name="GoldLabel" style="-unity-text-align: middle-left; width: 200px; font-size: 24px; left: 0; top: 0; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
+        <ui:Label text="0 gold/s" name="IncomeLabel" style="-unity-text-align: middle-left; white-space: nowrap; align-items: flex-end; width: 200px; font-size: 18px; right: auto; flex-direction: column; justify-content: flex-start; position: relative; top: 0; left: 0; margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
+        <ui:Label text="Health: 100" name="HealthLabel" style="position: absolute; right: 0; top: 0; font-size: 20px; width: 160px; align-self: auto; flex-direction: column; -unity-text-align: upper-left;" />
     </ui:VisualElement>
     <ui:Instance template="RecruitPanel" name="RecruitPanel" style="left: 0; bottom: 0; position: absolute; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;" />
     <ui:Instance template="SendUnitsPanel" name="SendUnitsPanel" style="right: 0; bottom: 0; position: absolute; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">

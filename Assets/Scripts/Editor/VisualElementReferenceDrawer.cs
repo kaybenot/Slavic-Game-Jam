@@ -44,8 +44,12 @@ public class VisualElementReferenceDrawer : PropertyDrawer
 		var documentProperty = property.FindPropertyRelative(DocumentFieldName);
 		var elementPathProperty = property.FindPropertyRelative(ElementPathFieldName);
 
-		Debug.Log(documentProperty.objectReferenceValue);
-		if (documentProperty.objectReferenceValue is UIDocument uiDocument)  
+		var visualElementReferenceType = property.boxedValue.GetType();
+		var visualElementType = visualElementReferenceType.IsGenericType
+			? visualElementReferenceType.GetGenericArguments()[0]
+			: typeof(VisualElement);
+
+		if (documentProperty.objectReferenceValue is UIDocument uiDocument)
 		{
 			if (rootVisualElement == null || rootVisualElement.visualTreeAssetSource != uiDocument.visualTreeAsset)
 			{
@@ -53,7 +57,7 @@ public class VisualElementReferenceDrawer : PropertyDrawer
 				var optionsList = ListPool<string>.Get();
 				optionsList.Clear();
 				optionsList.Add("Select Element");
-				PopulateListWithChildrenNames(rootVisualElement, optionsList);
+				PopulateListWithChildrenNames(rootVisualElement, optionsList, visualElementType);
 				popupOptions = optionsList.ToArray();
 				ListPool<string>.Release(optionsList);
 			}
@@ -64,7 +68,8 @@ public class VisualElementReferenceDrawer : PropertyDrawer
 			DrawExpanded(position, documentProperty, elementPathProperty);
 	}
 
-	private static void PopulateListWithChildrenNames(VisualElement parent, List<string> namesList, ReadOnlySpan<char> parentPath = default)
+	private static void PopulateListWithChildrenNames(VisualElement parent,
+		List<string> namesList, Type requiredType, ReadOnlySpan<char> parentPath = default)
 	{
 		for (int i = 0; i < parent.childCount; i++)
 		{
@@ -73,10 +78,14 @@ public class VisualElementReferenceDrawer : PropertyDrawer
 				continue;
 
 			var childPath = parentPath.IsEmpty ? child.name : $"{parentPath.ToString()}/{child.name}";
-			namesList.Add(childPath);
+			if (requiredType.IsAssignableFrom(child.GetType()))
+			{
+				namesList.Add(childPath);
+			}
+
 			if (child.childCount > 0)
 			{
-				PopulateListWithChildrenNames(child, namesList, childPath.AsSpan());
+				PopulateListWithChildrenNames(child, namesList, requiredType, childPath.AsSpan());
 			}
 		}
 	}
