@@ -31,6 +31,8 @@ public class GameplayController : MonoBehaviour
 			ref commandBuffer,
 			clientWorld.EntityManager,
 			log: true);
+
+		commandBuffer.Playback(clientWorld.EntityManager);
 	}
 
 	public void SetBattleDirection(BaseLane direction)
