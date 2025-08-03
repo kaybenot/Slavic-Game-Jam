@@ -8,37 +8,53 @@ using Unity.Jobs;
 namespace System.Path {
     
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     public partial struct PathWalkerSystem : ISystem {
         
-        private ComponentLookup<SplinePathData> _splineLookup;
+        private ComponentLookup<SplineData> _splineLookup;
         
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<PathWalker>();
-            _splineLookup = state.GetComponentLookup<SplinePathData>(true);
+            state.RequireForUpdate<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
+            _splineLookup = state.GetComponentLookup<SplineData>(true);
         }
         
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             _splineLookup.Update(ref state);
+            // RewindableAllocator
+            var bufferSys = SystemAPI.GetSingleton<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
+            var ecb = bufferSys.CreateCommandBuffer(state.WorldUnmanaged);
             var job = new Job() {
                 deltaTime = SystemAPI.Time.DeltaTime,
-                splineLookup = _splineLookup
+                splineLookup = _splineLookup,
+                commandBuffer = ecb.AsParallelWriter()
             };
             job.ScheduleParallel(new JobHandle()).Complete();
+            // ecb.Playback(state.EntityManager);
         }
-
 
         [BurstCompile]
         private partial struct Job : IJobEntity {
 
             public float deltaTime;
-            [ReadOnly] public ComponentLookup<SplinePathData> splineLookup;
+            [ReadOnly] public ComponentLookup<SplineData> splineLookup;
+            public EntityCommandBuffer.ParallelWriter commandBuffer;
             
-            public void Execute(ref PathWalker walker) {
-                walker.position += walker.velocity * deltaTime / splineLookup.GetRefRO(walker.spline).ValueRO.PathFromSpline(false).Length();
+            public void Execute(Entity entity, [ChunkIndexInQuery] int idx, ref PathWalker walker) {
+                var spline = splineLookup.GetRefRO(walker.spline).ValueRO;
+                walker.localPosition += walker.localVelocity * deltaTime;
+
+                if (walker.localPosition > 1f && !PathHelper.TryAdvanceSegment(ref walker, spline, walker.invert != 0)) {
+                    var ent = commandBuffer.CreateEntity(idx);
+                    commandBuffer.AddComponent(idx, ent, new PathFinished {
+                        spline = walker.spline,
+                        wasInverted = walker.invert
+                    });
+                    commandBuffer.DestroyEntity(idx, entity);
+                }
             }
         }
     }
-    
 }
