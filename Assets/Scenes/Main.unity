@@ -1017,22 +1017,6 @@ PrefabInstance:
       propertyPath: subScene
       value: 
       objectReference: {fileID: 786055329}
-    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: hostButton.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: joinButton.uiDocument
-      value: 
-      objectReference: {fileID: 5926145003203800763}
-    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: hostButton.elementPath
-      value: HostJoinPanel/Host
-      objectReference: {fileID: 0}
-    - target: {fileID: 4595039725367521293, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-      propertyPath: joinButton.elementPath
-      value: HostJoinPanel/Join
-      objectReference: {fileID: 0}
     - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
       propertyPath: costm.uiAsset
       value: 
@@ -1046,17 +1030,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
---- !u!114 &5926145003203800763 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6576804195842958996, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
-  m_PrefabInstance: {fileID: 5926145003203800762}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
