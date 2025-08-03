@@ -20,6 +20,8 @@ namespace Mono
         private VisualElementReference<Button> hostButton;
         [SerializeField]
         private VisualElementReference<Button> joinButton;
+        [SerializeField]
+        private VisualElementReference<TextField> ipTextField;
 
         private void Awake()
         {
@@ -63,7 +65,7 @@ namespace Mono
             var (clientWorld, _) = BootstrapWorld("ClientWorld");
 
             var port = (ushort)2137;
-            var ip = "26.214.121.150";
+            var ip = ipTextField.VisualElement.text;
             
             var connectionNetworkEndpoint = NetworkEndpoint.Parse(ip, port);
             var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
