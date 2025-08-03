@@ -108,7 +108,7 @@ namespace System.Base
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.RedGreen, false);
+                                        SplineType.BlueRed, false);
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
