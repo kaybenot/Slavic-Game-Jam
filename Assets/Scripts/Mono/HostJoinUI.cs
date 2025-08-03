@@ -63,7 +63,7 @@ namespace Mono
             var (clientWorld, _) = BootstrapWorld("ClientWorld");
 
             var port = (ushort)2137;
-            var ip = "26.216.140.190";
+            var ip = "26.214.121.150";
             
             var connectionNetworkEndpoint = NetworkEndpoint.Parse(ip, port);
             var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
