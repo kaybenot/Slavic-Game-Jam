@@ -13,27 +13,24 @@ namespace System.Server
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<PathWalker>();
+            state.RequireForUpdate<PathFinished>();
         }
 
         [BurstCompile]
-        private void DamageBase(ref SystemState state, in PathWalker pathWalker, BaseType type0, BaseType type1, int damage = 1)
+        private void DamageBase(ref SystemState state, BaseType startBase, BaseType endBase, byte wasInverted)
         {
-            if (pathWalker.position < 0f)
+            foreach (var baseData in SystemAPI.Query<RefRW<BaseData>>())
             {
-                foreach (var baseData in SystemAPI.Query<RefRW<BaseData>>())
+                if (wasInverted == 0)
                 {
-                    if (baseData.ValueRO.BaseType == type0)
+                    if (baseData.ValueRO.BaseType == endBase)
                     {
                         baseData.ValueRW.Health--;
                     }
                 }
-            }
-            else if (pathWalker.position > 1f)
-            {
-                foreach (var baseData in SystemAPI.Query<RefRW<BaseData>>())
+                else
                 {
-                    if (baseData.ValueRO.BaseType == type1)
+                    if (baseData.ValueRO.BaseType == startBase)
                     {
                         baseData.ValueRW.Health--;
                     }
@@ -46,33 +43,29 @@ namespace System.Server
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var (pathWalker, entity) in SystemAPI.Query<RefRO<PathWalker>>().WithEntityAccess())
+            foreach (var (pathFinished, entity)
+                     in SystemAPI.Query<RefRO<PathFinished>>().WithEntityAccess())
             {
-                if (pathWalker.ValueRO.position is <= 1f or > 0f)
-                {
-                    continue;
-                }
-                
-                var splinePathData = state.EntityManager.GetComponentData<SplinePathData>(pathWalker.ValueRO.spline);
-                switch (splinePathData.splineType)
+                var splinePathData = state.EntityManager.GetComponentData<SplineData>(pathFinished.ValueRO.spline);
+                switch (splinePathData.type)
                 {
                     case SplineType.RedGreen:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Red, BaseType.Green);
+                        DamageBase(ref state, BaseType.Red, BaseType.Green, pathFinished.ValueRO.wasInverted);
                         break;
                     case SplineType.YellowBlue:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Yellow, BaseType.Blue);
+                        DamageBase(ref state, BaseType.Yellow, BaseType.Blue, pathFinished.ValueRO.wasInverted);
                         break;
                     case SplineType.YellowGreen:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Yellow, BaseType.Green);
+                        DamageBase(ref state, BaseType.Yellow, BaseType.Green, pathFinished.ValueRO.wasInverted);
                         break;
                     case SplineType.YellowRed:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Yellow, BaseType.Red);
+                        DamageBase(ref state, BaseType.Yellow, BaseType.Red, pathFinished.ValueRO.wasInverted);
                         break;
                     case SplineType.BlueRed:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Blue, BaseType.Red);
+                        DamageBase(ref state, BaseType.Blue, BaseType.Red, pathFinished.ValueRO.wasInverted);
                         break;
                     case SplineType.BlueGreen:
-                        DamageBase(ref state, in pathWalker.ValueRO, BaseType.Blue, BaseType.Green);
+                        DamageBase(ref state, BaseType.Blue, BaseType.Green, pathFinished.ValueRO.wasInverted);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
