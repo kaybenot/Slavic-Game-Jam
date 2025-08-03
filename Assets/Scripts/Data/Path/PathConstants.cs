@@ -6,5 +6,7 @@
 
         public const float OffsetScale = 1 / 8f;
 
+        public const float TargetFollowSpeed = 5f;
+
     }
 }

@@ -33,7 +33,7 @@ namespace System.Client
                     playerInputData.ValueRW.TestAction.Set();
                     RPC.Send(new RequestUnitSpawnRpc
                     {
-                        Lane = BaseLane.Forward
+                        Lane = BaseLane.Right
                     }, ref ecb, state.EntityManager, true);
                 }
                 else

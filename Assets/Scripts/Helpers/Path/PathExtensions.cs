@@ -12,7 +12,7 @@ namespace Helpers.Path {
             ref var points = ref spline.points.Value;
             
             if (invert) {
-                idx = points.points.Length - idx - 1;
+                idx = points.segmentCount - idx - 1;
             }
             
             var p1 = points.points[idx];

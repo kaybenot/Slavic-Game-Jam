@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 
 using static Unity.Mathematics.math;
+using SplineType = Helpers.Path.SplineType;
 
 namespace Authoring.Path {
     
@@ -14,6 +15,8 @@ namespace Authoring.Path {
         // [SerializeField] private Transform first;
         // [SerializeField] private Transform second;
 
+        [SerializeField] private SplineType type;
+        
         public class SplinePathBaker : Baker<SplinePathAuthoring> {
             public override void Bake(SplinePathAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.None);
@@ -29,7 +32,7 @@ namespace Authoring.Path {
                 ref var spb = ref bb.ConstructRoot<SplinePointsBlob>();
 
                 BlobBuilderArray<float3> points = bb.Allocate(ref spb.points, authoring.transform.childCount);
-                BlobBuilderArray<float3> normals = bb.Allocate(ref spb.points, authoring.transform.childCount - 1);
+                BlobBuilderArray<float3> normals = bb.Allocate(ref spb.normalsSide, authoring.transform.childCount - 1);
 
                 for (int i = 0; i < t.childCount; i++) {
                     var c1 = t.GetChild(i);
@@ -38,7 +41,7 @@ namespace Authoring.Path {
                         var delta = points[i - 1] - (float3)c1.position;
                         var norm = normalize(delta);
                         //May be inverted but who cares
-                        normals[i] = cross(norm, up());
+                        normals[i - 1] = cross(norm, up());
                     }
                 }
 
@@ -46,10 +49,13 @@ namespace Authoring.Path {
                 
                 var blobRef = bb.CreateBlobAssetReference<SplinePointsBlob>(Allocator.Persistent);
                 
+                bb.Dispose();
+                
                 AddBlobAsset(ref blobRef, out var hash);
                 
                 AddComponent(entity, new SplineData {
-                    points = blobRef
+                    points = blobRef,
+                    type = authoring.type
                 });
                 
                 // AddComponent(entity, new SplineSegmentData() {

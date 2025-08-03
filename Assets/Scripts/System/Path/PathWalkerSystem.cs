@@ -4,11 +4,11 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
 
 namespace System.Path {
     
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     public partial struct PathWalkerSystem : ISystem {
         
         private ComponentLookup<SplineData> _splineLookup;
@@ -16,20 +16,23 @@ namespace System.Path {
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
             state.RequireForUpdate<PathWalker>();
+            state.RequireForUpdate<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
             _splineLookup = state.GetComponentLookup<SplineData>(true);
         }
         
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             _splineLookup.Update(ref state);
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            // RewindableAllocator
+            var bufferSys = SystemAPI.GetSingleton<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
+            var ecb = bufferSys.CreateCommandBuffer(state.WorldUnmanaged);
             var job = new Job() {
                 deltaTime = SystemAPI.Time.DeltaTime,
                 splineLookup = _splineLookup,
                 commandBuffer = ecb.AsParallelWriter()
             };
             job.ScheduleParallel(new JobHandle()).Complete();
-            ecb.Playback(state.EntityManager);
+            // ecb.Playback(state.EntityManager);
         }
 
         [BurstCompile]
