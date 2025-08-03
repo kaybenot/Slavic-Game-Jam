@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using Data.Path;
+﻿using Data.Path;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Splines;
-
 using static Unity.Mathematics.math;
 using SplineType = Helpers.Path.SplineType;
 
@@ -16,6 +13,7 @@ namespace Authoring.Path {
         // [SerializeField] private Transform second;
 
         [SerializeField] private SplineType type;
+        [SerializeField] private Color gizmoColor = Color.blue;
         
         public class SplinePathBaker : Baker<SplinePathAuthoring> {
             public override void Bake(SplinePathAuthoring authoring) {
@@ -63,6 +61,19 @@ namespace Authoring.Path {
                 //     second = second
                 // });
             }
+        }
+
+        private void OnDrawGizmos() {
+            var c = Gizmos.color;
+            Gizmos.color = gizmoColor;
+            var points = new Vector3[transform.childCount];
+            for (int i = 0; i < transform.childCount; i++) {
+                var t = transform.GetChild(i);
+                points[i] = t.position;
+                Gizmos.DrawSphere(t.position, 0.25f);
+            }
+            Gizmos.DrawLineStrip(points, false);
+            Gizmos.color = c;
         }
     }
 }
