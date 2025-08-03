@@ -18,7 +18,7 @@ namespace Helpers.Path {
             var p1 = points.points[idx];
             var p2 = points.points[idx + 1];
 
-            return MakeWrapper(p1, p2, points.normalsSide[idx], invert);
+            return MakeWrapper(p2, p1, points.normalsSide[idx], invert);
         }
 
         [BurstCompile]

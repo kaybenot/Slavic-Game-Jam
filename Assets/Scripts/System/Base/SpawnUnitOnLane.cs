@@ -39,7 +39,7 @@ namespace System.Base
                 {
                     var pw = new PathWalker {
                         spline = splineEntity,
-                        segment = reverse ? splinePathData.ValueRO.points.Value.segmentCount : -1,
+                        segment = -1,
                         moveSpeed = 4f + _random.NextFloat() * 1f,
                         localPosition = 1f,
                         invert = (byte) (reverse ? 1 : 0),
@@ -85,15 +85,15 @@ namespace System.Base
                             {
                                 case BaseLane.Left:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.BlueRed, true);
+                                        SplineType.BlueRed, false);
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowRed, false);
+                                        SplineType.YellowRed, true);
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.RedGreen, false);
+                                        SplineType.RedGreen, true);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -108,11 +108,11 @@ namespace System.Base
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.RedGreen, false);
+                                        SplineType.BlueRed, true);
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowBlue, true);
+                                        SplineType.YellowBlue, false);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -127,11 +127,11 @@ namespace System.Base
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowGreen, false);
+                                        SplineType.YellowGreen, true);
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowBlue, false);
+                                        SplineType.YellowBlue, true);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -142,7 +142,7 @@ namespace System.Base
                             {
                                 case BaseLane.Left:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowGreen, true);
+                                        SplineType.YellowGreen, false);
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
@@ -150,7 +150,7 @@ namespace System.Base
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.RedGreen, true);
+                                        SplineType.RedGreen, false);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
