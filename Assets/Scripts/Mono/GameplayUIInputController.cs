@@ -48,12 +48,17 @@ public class GameplayUIInputController : MonoBehaviour
 
 	private void OnDisable()
 	{
-		recruitTankButton.VisualElement.clicked -= RecruitTank;
-		recruitSupportButton.VisualElement.clicked -= RecruitSupport;
-		recruitRangedButton.VisualElement.clicked -= RecruitRanged;
+		TryUnsubscribe(recruitTankButton, RecruitTank);
+		TryUnsubscribe(recruitSupportButton, RecruitSupport);
+		TryUnsubscribe(recruitRangedButton, RecruitRanged);
+		TryUnsubscribe(sendLeftButton, SetDirectionLeft);
+		TryUnsubscribe(sendForwardButton, SetDirectionForward);
+		TryUnsubscribe(sendRightButton, SetDirectionRight);
+	}
 
-		sendLeftButton.VisualElement.clicked -= SetDirectionLeft;
-		sendForwardButton.VisualElement.clicked -= SetDirectionForward;
-		sendRightButton.VisualElement.clicked -= SetDirectionRight;
+	private void TryUnsubscribe(VisualElementReference<Button> visualElementReference, System.Action method)
+	{
+		if (visualElementReference.VisualElement != null)
+			visualElementReference.VisualElement.clicked -= method;
 	}
 }
