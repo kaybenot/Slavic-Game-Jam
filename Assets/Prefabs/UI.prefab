@@ -210,6 +210,9 @@ MonoBehaviour:
   joinButton:
     uiDocument: {fileID: 6576804195842958996}
     elementPath: HostJoinPanel/Join
+  ipTextField:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/IpField
 --- !u!114 &1628560194364533526
 MonoBehaviour:
   m_ObjectHideFlags: 0
