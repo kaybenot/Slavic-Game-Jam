@@ -9,6 +9,20 @@ public class GameplayUIInputController : MonoBehaviour
 	[SerializeField]
 	private UIDocument uiDocument;
 
+	[Header("Visual Elements")]
+	[SerializeField]
+	private VisualElementReference recruitTankButtonReference;
+	[SerializeField]
+	private VisualElementReference recruitSupportButtonReference;
+	[SerializeField]
+	private VisualElementReference recruitRangedButtonReference;
+	[SerializeField]
+	private VisualElementReference sendLeftButtonReference;
+	[SerializeField]
+	private VisualElementReference sendForwardButtonReference;
+	[SerializeField]
+	private VisualElementReference sendRightButtonReference;
+
 	private Button recruitTankButton;
 	private Button recruitSupportButton;
 	private Button recruitRangedButton;
@@ -19,13 +33,13 @@ public class GameplayUIInputController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		recruitTankButton = uiDocument.rootVisualElement.Q<Button>("RecruitTankButton");
-		recruitSupportButton = uiDocument.rootVisualElement.Q<Button>("RecruitSupportButton");
-		recruitRangedButton = uiDocument.rootVisualElement.Q<Button>("RecruitRangedButton");
-		
-		sendLeftButton = uiDocument.rootVisualElement.Q<Button>("SendLeftButton");
-		sendForwardButton = uiDocument.rootVisualElement.Q<Button>("SendForwardButton");
-		sendRightButton = uiDocument.rootVisualElement.Q<Button>("SendRightButton");
+		recruitTankButton = recruitTankButtonReference.GetElement<Button>();
+		recruitSupportButton = recruitSupportButtonReference.GetElement<Button>();
+		recruitRangedButton = recruitRangedButtonReference.GetElement<Button>();
+
+		sendLeftButton = sendLeftButtonReference.GetElement<Button>();
+		sendForwardButton = sendForwardButtonReference.GetElement<Button>();
+		sendRightButton = sendRightButtonReference.GetElement<Button>();
 
 		recruitTankButton.clicked += RecruitTank;
 		recruitSupportButton.clicked += RecruitSupport;

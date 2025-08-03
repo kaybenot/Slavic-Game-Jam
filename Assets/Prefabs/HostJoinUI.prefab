@@ -95,3 +95,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayController: {fileID: 0}
   uiDocument: {fileID: 6576804195842958996}
+  recruitTankButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitTankButton
+  recruitSupportButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitSupportButton
+  recruitRangedButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitRangedButton
+  sendLeftButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendLeftButton
+  sendForwardButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendForwardButton
+  sendRightButtonReference:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendRightButton
+  costm:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/Host

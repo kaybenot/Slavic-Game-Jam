@@ -2,7 +2,6 @@
 using System.Linq;
 using Data.Camera;
 using Helpers.Network;
-using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
