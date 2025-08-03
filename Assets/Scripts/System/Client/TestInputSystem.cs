@@ -23,26 +23,26 @@ namespace System.Client
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            foreach (var playerInputData in SystemAPI.Query<RefRW<PlayerInputData>>()
-                         .WithAll<GhostOwnerIsLocal>())
-            {
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    playerInputData.ValueRW.TestAction.Set();
-                    RPC.Send(new RequestUnitSpawnRpc
-                    {
-                        Lane = BaseLane.Right
-                    }, ref ecb, state.EntityManager, true);
-                }
-                else
-                {
-                    playerInputData.ValueRW.TestAction = default;
-                }
-            }
-            
-            ecb.Playback(state.EntityManager);
+            // var ecb = new EntityCommandBuffer(Allocator.Temp);
+            //
+            // foreach (var playerInputData in SystemAPI.Query<RefRW<PlayerInputData>>()
+            //              .WithAll<GhostOwnerIsLocal>())
+            // {
+            //     if (Input.GetKeyDown(KeyCode.A))
+            //     {
+            //         playerInputData.ValueRW.TestAction.Set();
+            //         RPC.Send(new RequestUnitSpawnRpc
+            //         {
+            //             Lane = BaseLane.Right
+            //         }, ref ecb, state.EntityManager, true);
+            //     }
+            //     else
+            //     {
+            //         playerInputData.ValueRW.TestAction = default;
+            //     }
+            // }
+            //
+            // ecb.Playback(state.EntityManager);
         }
     }
 }
