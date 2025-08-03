@@ -47,6 +47,11 @@ namespace System.Path {
                 walker.localPosition += walker.localVelocity * deltaTime;
 
                 if (walker.localPosition > 1f && !PathHelper.TryAdvanceSegment(ref walker, spline, walker.invert != 0)) {
+                    var ent = commandBuffer.CreateEntity(idx);
+                    commandBuffer.AddComponent(idx, ent, new PathFinished {
+                        spline = walker.spline,
+                        wasInverted = walker.invert
+                    });
                     commandBuffer.DestroyEntity(idx, entity);
                 }
             }
