@@ -75,7 +75,11 @@ namespace System.Base
 
                     const int price = 10;
                     if (playerData.ValueRO.Gold < price)
+                    {
+                        entityCommandBuffer.DestroyEntity(rpcEntity);
+                        entityCommandBuffer.Playback(state.EntityManager);
                         return;
+                    }
 
                     playerData.ValueRW.Gold -= price;
 				}

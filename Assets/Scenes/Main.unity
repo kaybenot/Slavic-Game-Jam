@@ -839,14 +839,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1061012201775671899, guid: 7b78c7fe61966704db3f4c449f1cc56a, type: 3}
-      propertyPath: FollowOffset.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061012201775671899, guid: 7b78c7fe61966704db3f4c449f1cc56a, type: 3}
-      propertyPath: FollowOffset.z
-      value: -20
-      objectReference: {fileID: 0}
     - target: {fileID: 5345696449558867245, guid: 7b78c7fe61966704db3f4c449f1cc56a, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
