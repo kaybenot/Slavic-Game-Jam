@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 using Unity.NetCode;
 using Unity.Collections;
 using Helpers.Network;
+using System.Server;
+using Data.Base;
 
 public class PlayerDataUIController : MonoBehaviour
 {
@@ -15,11 +17,13 @@ public class PlayerDataUIController : MonoBehaviour
 	[SerializeField]
 	private VisualElementReference<Label> baseHealthLabel;
 
+	private int currentBaseHealth;
 	private int currentGold;
 	private float incomeRefreshTimer;
 
 	private void Start()
 	{
+		currentBaseHealth = int.MinValue;
 		incomeRefreshTimer = 1;
 		UpdateValues();
 	}
@@ -34,6 +38,7 @@ public class PlayerDataUIController : MonoBehaviour
 
 		var entityManager = world.EntityManager;
 		RefreshGold(entityManager);
+		RefreshBaseHealth(entityManager);
 
 		incomeRefreshTimer += Time.deltaTime;
 		if (incomeRefreshTimer > 1)
@@ -42,6 +47,21 @@ public class PlayerDataUIController : MonoBehaviour
 			RefreshIncome(entityManager);
 		}
 	}
+
+	private void RefreshBaseHealth(EntityManager entityManager)
+	{
+		using var baseDataQuery = entityManager.CreateEntityQuery(typeof(BaseData), typeof(GhostOwnerIsLocal));
+		if (baseDataQuery.IsEmpty)
+			return;
+
+		var baseData = baseDataQuery.GetSingleton<BaseData>();
+		if (currentBaseHealth != baseData.Health)
+		{
+			currentBaseHealth = baseData.Health;
+			baseHealthLabel.VisualElement.text = $"Base Health: {currentBaseHealth}";
+		}
+	}
+
 
 	private void RefreshGold(EntityManager entityManager)
 	{

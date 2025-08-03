@@ -12,7 +12,7 @@ using Unity.NetCode;
 
 namespace System.Base
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
+	[WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct SpawnUnitOnLane : ISystem {
         private Unity.Mathematics.Random _random;
         
@@ -58,7 +58,7 @@ namespace System.Base
         {
             var entityCommandBuffer = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var (receiveRpcCommandRequest, unitSpawnRequest, entity) 
+            foreach (var (receiveRpcCommandRequest, unitSpawnRequest, rpcEntity) 
                      in SystemAPI.Query<RefRO<ReceiveRpcCommandRequest>, RefRO<RequestUnitSpawnRpc>>().WithEntityAccess())
             {
                 Logger.Log(new LogData
@@ -168,7 +168,7 @@ namespace System.Base
                     WorldUnmanaged = state.WorldUnmanaged
                 });
                 
-                entityCommandBuffer.DestroyEntity(entity);
+                entityCommandBuffer.DestroyEntity(rpcEntity);
             }
             
             entityCommandBuffer.Playback(state.EntityManager);

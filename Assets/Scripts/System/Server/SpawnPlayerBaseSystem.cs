@@ -53,7 +53,8 @@ namespace Systems.Network.Server
                         });
                         entityCommandBuffer.SetComponent(baseObj, new BaseData
                         {
-                            BaseType = (BaseType)currentId
+                            BaseType = (BaseType)currentId,
+                            Health = 100,
                         });
                         var requesterNetworkId =
                             SystemAPI.GetComponent<NetworkId>(sourceEntity);
