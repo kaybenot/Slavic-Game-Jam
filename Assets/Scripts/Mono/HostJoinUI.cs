@@ -65,7 +65,7 @@ namespace Mono
             var (clientWorld, _) = BootstrapWorld("ClientWorld");
 
             var port = (ushort)2137;
-            var ip = ipTextField.VisualElement.text;
+            var ip = ipTextField.VisualElement.value;
             
             var connectionNetworkEndpoint = NetworkEndpoint.Parse(ip, port);
             var networkStreamDriver = clientWorld.EntityManager.CreateEntityQuery(typeof(NetworkStreamDriver))
