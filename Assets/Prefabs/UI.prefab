@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1628560194364533526}
   - component: {fileID: 5153845138507569526}
   m_Layer: 5
-  m_Name: HostJoinUI
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,6 +67,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subScene: {fileID: 0}
+  hostButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/Host
+  joinButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: HostJoinPanel/Join
 --- !u!114 &1628560194364533526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +85,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0f9bf10a08174409e4d66039dc1213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiDocument: {fileID: 6576804195842958996}
-  currentGold: 0
+  goldLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/GoldLabel
+  incomeLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/IncomeLabel
+  baseHealthLabel:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/TopPanel/HealthLabel
 --- !u!114 &5153845138507569526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,3 +108,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayController: {fileID: 0}
   uiDocument: {fileID: 6576804195842958996}
+  recruitTankButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitTankButton
+  recruitSupportButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitSupportButton
+  recruitRangedButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/RecruitPanel/RecruitRangedButton
+  sendLeftButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendLeftButton
+  sendForwardButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendForwardButton
+  sendRightButton:
+    uiDocument: {fileID: 6576804195842958996}
+    elementPath: GamePanel/SendUnitsPanel/ButtonsPanel/SendRightButton

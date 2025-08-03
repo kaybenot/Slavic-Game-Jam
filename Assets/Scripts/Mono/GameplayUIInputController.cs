@@ -9,31 +9,29 @@ public class GameplayUIInputController : MonoBehaviour
 	[SerializeField]
 	private UIDocument uiDocument;
 
-	private Button recruitTankButton;
-	private Button recruitSupportButton;
-	private Button recruitRangedButton;
-
-	private Button sendLeftButton;
-	private Button sendForwardButton;
-	private Button sendRightButton;
+	[Header("Visual Elements")]
+	[SerializeField]
+	private VisualElementReference<Button> recruitTankButton;
+	[SerializeField]
+	private VisualElementReference<Button> recruitSupportButton;
+	[SerializeField]
+	private VisualElementReference<Button> recruitRangedButton;
+	[SerializeField]
+	private VisualElementReference<Button> sendLeftButton;
+	[SerializeField]
+	private VisualElementReference<Button> sendForwardButton;
+	[SerializeField]
+	private VisualElementReference<Button> sendRightButton;
 
 	private void OnEnable()
 	{
-		recruitTankButton = uiDocument.rootVisualElement.Q<Button>("RecruitTankButton");
-		recruitSupportButton = uiDocument.rootVisualElement.Q<Button>("RecruitSupportButton");
-		recruitRangedButton = uiDocument.rootVisualElement.Q<Button>("RecruitRangedButton");
-		
-		sendLeftButton = uiDocument.rootVisualElement.Q<Button>("SendLeftButton");
-		sendForwardButton = uiDocument.rootVisualElement.Q<Button>("SendForwardButton");
-		sendRightButton = uiDocument.rootVisualElement.Q<Button>("SendRightButton");
+		recruitTankButton.VisualElement.clicked += RecruitTank;
+		recruitSupportButton.VisualElement.clicked += RecruitSupport;
+		recruitRangedButton.VisualElement.clicked += RecruitRanged;
 
-		recruitTankButton.clicked += RecruitTank;
-		recruitSupportButton.clicked += RecruitSupport;
-		recruitRangedButton.clicked += RecruitRanged;
-
-		sendLeftButton.clicked += SetDirectionLeft;
-		sendForwardButton.clicked += SetDirectionForward;
-		sendRightButton.clicked += SetDirectionRight;
+		sendLeftButton.VisualElement.clicked += SetDirectionLeft;
+		sendForwardButton.VisualElement.clicked += SetDirectionForward;
+		sendRightButton.VisualElement.clicked += SetDirectionRight;
 	}
 
 	private void RecruitTank() => RecruitUnit(UnitType.Tank);
@@ -50,12 +48,12 @@ public class GameplayUIInputController : MonoBehaviour
 
 	private void OnDisable()
 	{
-		recruitTankButton.clicked -= RecruitTank;
-		recruitSupportButton.clicked -= RecruitSupport;
-		recruitRangedButton.clicked -= RecruitRanged;
+		recruitTankButton.VisualElement.clicked -= RecruitTank;
+		recruitSupportButton.VisualElement.clicked -= RecruitSupport;
+		recruitRangedButton.VisualElement.clicked -= RecruitRanged;
 
-		sendLeftButton.clicked -= SetDirectionLeft;
-		sendForwardButton.clicked -= SetDirectionForward;
-		sendRightButton.clicked -= SetDirectionRight;
+		sendLeftButton.VisualElement.clicked -= SetDirectionLeft;
+		sendForwardButton.VisualElement.clicked -= SetDirectionForward;
+		sendRightButton.VisualElement.clicked -= SetDirectionRight;
 	}
 }

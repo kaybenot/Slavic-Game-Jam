@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  size: {x: 307.78906, y: 95.549286, z: 328.4675}
+  size: {x: 3, y: 3, z: 3}
   overrideRendererFilters: 0
   minRendererVolumeSize: 0.1
   objectLayerMask:
@@ -825,7 +825,7 @@ Transform:
   m_GameObject: {fileID: 1768462290}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.657364, y: -23.601273, z: 35}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1017,6 +1017,10 @@ PrefabInstance:
       propertyPath: subScene
       value: 
       objectReference: {fileID: 786055329}
+    - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
+      propertyPath: costm.uiAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: a48432f9d7e3d934fa1d9bb037ccbfa7, type: 3}
     - target: {fileID: 5153845138507569526, guid: 0b14b0b417c6d544a9a320f5fc6acb2c, type: 3}
       propertyPath: gameplayController
       value: 

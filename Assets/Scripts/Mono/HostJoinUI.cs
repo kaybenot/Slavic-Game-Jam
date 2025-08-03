@@ -15,8 +15,11 @@ namespace Mono
         [SerializeField] private SubScene subScene;
         
         private UIDocument document;
-        private Button hostButton;
-        private Button joinButton;
+
+        [SerializeField]
+        private VisualElementReference<Button> hostButton;
+        [SerializeField]
+        private VisualElementReference<Button> joinButton;
 
         private void Awake()
         {
@@ -25,11 +28,8 @@ namespace Mono
                 throw new Exception("No UIDocument found");
             }
             
-            hostButton = document.rootVisualElement.Q<Button>("Host");
-            joinButton = document.rootVisualElement.Q<Button>("Join");
-            
-            hostButton.RegisterCallback<ClickEvent>(OnHostClick);
-            joinButton.RegisterCallback<ClickEvent>(OnJoinClick);
+            hostButton.VisualElement.RegisterCallback<ClickEvent>(OnHostClick);
+            joinButton.VisualElement.RegisterCallback<ClickEvent>(OnJoinClick);
         }
 
         private void HideUI()

@@ -13,8 +13,9 @@ using Unity.NetCode;
 namespace System.Base
 {
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
-    public partial struct SpawnUnitOnLane : ISystem
-    {
+    public partial struct SpawnUnitOnLane : ISystem {
+        private Unity.Mathematics.Random _random;
+        
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -23,6 +24,8 @@ namespace System.Base
 
             var query = SystemAPI.QueryBuilder().WithAll<BaseData, GhostOwner>().Build();
             state.RequireForUpdate(query);
+            
+            _random = Unity.Mathematics.Random.CreateFromIndex(1337);
         }
 
         [BurstCompile]
@@ -30,28 +33,22 @@ namespace System.Base
             ref Entity unitEntity, SplineType splineType, bool reverse)
         {
             foreach (var (splinePathData, splineEntity)
-                     in SystemAPI.Query<RefRO<SplinePathData>>().WithEntityAccess())
+                     in SystemAPI.Query<RefRO<SplineData>>().WithEntityAccess())
             {
-                if (splinePathData.ValueRO.splineType == splineType)
+                if (splinePathData.ValueRO.type == splineType)
                 {
-                    if (reverse)
-                    {
-                        entityCommandBuffer.SetComponent(unitEntity, new PathWalker
-                        {
-                            spline = splineEntity,
-                            position = 1f,
-                            velocity = -5f
-                        });
-                    }
-                    else
-                    {
-                        entityCommandBuffer.SetComponent(unitEntity, new PathWalker
-                        {
-                            spline = splineEntity,
-                            position = 0f,
-                            velocity = 5f
-                        });
-                    }
+                    var pw = new PathWalker {
+                        spline = splineEntity,
+                        segment = reverse ? splinePathData.ValueRO.points.Value.segmentCount : -1,
+                        moveSpeed = 4f + _random.NextFloat() * 1f,
+                        localPosition = 1f,
+                        invert = (byte) (reverse ? 1 : 0),
+                        offset = (sbyte)_random.NextInt(-16, 16)
+                    };
+
+                    PathHelper.TryAdvanceSegment(ref pw, splinePathData.ValueRO, reverse);
+                    
+                    entityCommandBuffer.SetComponent(unitEntity, pw);
                 }
             }
         }
@@ -60,7 +57,7 @@ namespace System.Base
         public void OnUpdate(ref SystemState state)
         {
             var entityCommandBuffer = new EntityCommandBuffer(Allocator.Temp);
-
+            
             foreach (var (receiveRpcCommandRequest, unitSpawnRequest, entity) 
                      in SystemAPI.Query<RefRO<ReceiveRpcCommandRequest>, RefRO<RequestUnitSpawnRpc>>().WithEntityAccess())
             {
@@ -92,7 +89,7 @@ namespace System.Base
                                     break;
                                 case BaseLane.Right:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
-                                        SplineType.YellowRed, true);
+                                        SplineType.YellowRed, false);
                                     break;
                                 case BaseLane.Forward:
                                     SetWalkerComponent(ref state, ref entityCommandBuffer, ref unitEntity,
