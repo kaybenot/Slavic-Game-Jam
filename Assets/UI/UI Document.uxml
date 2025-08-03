@@ -1,9 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="GamePanel" src="project://database/Assets/UI/GamePanel.uxml?fileID=9197481963319205126&amp;guid=a48432f9d7e3d934fa1d9bb037ccbfa7&amp;type=3#GamePanel" />
     <Style src="project://database/Assets/UI/USS.uss?fileID=7433441132597879392&amp;guid=9f236467b10fb374da9d02b5eb024d96&amp;type=3#USS" />
-    <ui:VisualElement name="HostJoinPanel" enabled="true" style="flex-grow: 1; overflow: visible;">
-        <ui:Button text="Host" name="Host" />
-        <ui:Button text="Join" name="Join" />
+    <ui:VisualElement name="HostJoinPanel" enabled="true" style="flex-grow: 1; overflow: visible; background-size: 100% 100%; background-position-x: center 0;">
+        <ui:Button text="Host" name="Host" style="top: 40%; background-image: url(&quot;project://database/Assets/Art/UI/6.png?fileID=2800000&amp;guid=51b27eda9690bd74386e2c9a236772f0&amp;type=3#6&quot;); width: auto; height: auto; -unity-background-image-tint-color: rgb(236, 232, 215); -unity-background-scale-mode: scale-to-fit;" />
+        <ui:Button text="Join" name="Join" style="top: 45%; background-image: url(&quot;project://database/Assets/Art/UI/6.png?fileID=2800000&amp;guid=51b27eda9690bd74386e2c9a236772f0&amp;type=3#6&quot;); -unity-background-scale-mode: scale-to-fit;" />
     </ui:VisualElement>
-    <ui:Instance template="GamePanel" name="GamePanel" picking-mode="Ignore" style="position: absolute; height: auto; width: auto; left: 0; right: 0; font-size: 20px; visibility: hidden; bottom: 0; top: 0;" />
+    <ui:Instance template="GamePanel" name="GamePanel" picking-mode="Ignore" enabled="true" style="position: absolute; height: auto; width: auto; left: -1px; right: 2px; font-size: 20px; visibility: hidden; bottom: 0; top: 0;" />
 </ui:UXML>
