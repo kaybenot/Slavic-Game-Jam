@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label text="Recruit Units" style="height: auto; width: auto; left: 0; right: 0; flex-direction: column; position: relative; -unity-text-align: middle-center; margin-bottom: 12px; margin-top: 12px; padding-left: 2px;" />
-    <ui:Button text="Recruit Knight" name="RecruitTankButton" />
-    <ui:Button text="Recruit Mage" name="RecruitSupportButton" />
-    <ui:Button text="Recruit Archer" name="RecruitRangedButton" />
+    <ui:Label text="Recruit Units" style="height: auto; width: auto; left: 0; right: 0; flex-direction: column; position: relative; -unity-text-align: middle-center; margin-bottom: 12px; margin-top: 12px; padding-left: 2px; -unity-font-definition: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;);" />
+    <ui:Button text="Recruit Knight" name="RecruitTankButton" style="background-image: url(&quot;project://database/Assets/Art/UI/6.png?fileID=2800000&amp;guid=51b27eda9690bd74386e2c9a236772f0&amp;type=3#6&quot;); -unity-background-scale-mode: scale-to-fit;" />
+    <ui:Button text="Recruit Mage" name="RecruitSupportButton" style="background-image: url(&quot;project://database/Assets/Art/UI/6.png?fileID=2800000&amp;guid=51b27eda9690bd74386e2c9a236772f0&amp;type=3#6&quot;); -unity-background-scale-mode: scale-to-fit;" />
+    <ui:Button text="Recruit Archer" name="RecruitRangedButton" style="background-image: url(&quot;project://database/Assets/Art/UI/6.png?fileID=2800000&amp;guid=51b27eda9690bd74386e2c9a236772f0&amp;type=3#6&quot;); -unity-background-scale-mode: scale-to-fit;" />
 </ui:UXML>
