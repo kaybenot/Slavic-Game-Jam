@@ -34,17 +34,17 @@ namespace Data.Player
 			[ReadOnly] public GhostOwner IncomeSourceOwner;
 
 			[BurstCompile]
-			public readonly void Execute(ref PlayerData playerData, in GhostOwner player)
+			public readonly void Execute(ref PlayerData playerData, ref GoldEarningData goldEarningData, in GhostOwner player)
 			{
 				if (player.NetworkId != IncomeSourceOwner.NetworkId)
 					return;
 
-				playerData.EarntGold += IncomeSource.GoldPerSecond * DeltaTime;
-				if (playerData.EarntGold < 1)
+				goldEarningData.earntGold += IncomeSource.GoldPerSecond * DeltaTime;
+				if (goldEarningData.earntGold < 1)
 					return;
 				
-				int goldIncome = (int)playerData.EarntGold;
-				playerData.EarntGold -= goldIncome;
+				int goldIncome = (int)goldEarningData.earntGold;
+				goldEarningData.earntGold -= goldIncome;
 				playerData.Gold += goldIncome;
 			}
 		}

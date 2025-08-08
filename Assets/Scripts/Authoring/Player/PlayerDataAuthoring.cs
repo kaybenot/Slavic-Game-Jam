@@ -12,10 +12,9 @@ namespace Authoring.Player
         {
             public override void Bake(PlayerDataAuthoring authoring)
             {
-                AddComponent(GetEntity(TransformUsageFlags.None), new PlayerData
-                {
-                    Gold = authoring.StartingGold
-                });
+				Entity playerEntity = GetEntity(TransformUsageFlags.None);
+				AddComponent(playerEntity, new PlayerData { Gold = authoring.StartingGold });
+                AddComponent(playerEntity, new GoldEarningData());
             }
         }
     }
